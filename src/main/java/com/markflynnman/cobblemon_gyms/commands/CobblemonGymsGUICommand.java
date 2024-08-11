@@ -18,25 +18,25 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraftforge.network.NetworkHooks;
 import org.slf4j.Logger;
 
-import java.util.Arrays;
-
 public class CobblemonGymsGUICommand {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public CobblemonGymsGUICommand(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("GymGUI").requires((p) -> {
-            return p.hasPermission(3);
+            return p.hasPermission(Config.getGymGUICommand());
         }).executes((command) -> {
             if (command.getSource().getPlayer() != null) {
                 return cobblemonGymsGUI(command.getSource(), command.getSource().getPlayer());
             }
             else { return -1; }
-        }).then((Commands.argument("target", EntityArgument.player()).executes((command) -> {
+        }).then((Commands.argument("target", EntityArgument.player()).requires((p) -> {
+            return p.hasPermission(Config.getGymGUICommandOther());
+        }).executes((command) -> {
             return cobblemonGymsGUI(command.getSource(), EntityArgument.getPlayer(command, "target"));
         }))));
 
         dispatcher.register(Commands.literal("GymCommands").requires((p) -> {
-            return p.hasPermission(4);
+            return p.hasPermission(Config.getGymCommandsSetCommand());
         }).then(Commands.literal("set").then(Commands.argument("gym", StringArgumentType.word()).suggests(new CobblemonGymsSuggestionProvider())
         .then(Commands.argument("command", StringArgumentType.greedyString()).executes((command) -> {
             return GymCommands(command.getSource(), StringArgumentType.getString(command, "gym"), StringArgumentType.getString(command, "command"));

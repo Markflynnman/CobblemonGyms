@@ -9,6 +9,16 @@ public class Config {
     public static final ForgeConfigSpec CONFIG_SPEC;
     public static final String DEFAULT_GYM_COMMAND = "say Setup gym command in the config or by typing \"/GymCommands set [gym] [command]\".";
     public static final Map<String, ForgeConfigSpec.ConfigValue<String>> GymConfigCommands = new HashMap<>();
+
+    private static ForgeConfigSpec.IntValue gymGUICommand;
+    private static ForgeConfigSpec.IntValue gymGUICommandOther;
+    private static ForgeConfigSpec.IntValue badgesCommand;
+    private static ForgeConfigSpec.IntValue badgesCommandOther;
+    private static ForgeConfigSpec.IntValue badgesAddCommand;
+    private static ForgeConfigSpec.IntValue badgesRemoveCommand;
+    private static ForgeConfigSpec.IntValue badgesDevCommand;
+    private static ForgeConfigSpec.IntValue gymCommandsSetCommand;
+
     private static ForgeConfigSpec.ConfigValue<String> indigoBoulderGymCommand;
     private static ForgeConfigSpec.ConfigValue<String> indigoCascadeGymCommand;
     private static ForgeConfigSpec.ConfigValue<String> indigoThunderGymCommand;
@@ -104,6 +114,23 @@ public class Config {
 
     private static void setupConfig(ForgeConfigSpec.Builder builder) {
         builder.push("CobblemonGyms");
+        builder.comment("Required permission levels for commands. [0 (all), 1 (moderator), 2 (gamemaster), 3 (admin), and 4 (owner)]");
+        builder.push("Commands");
+        builder.comment("\"/GymGUI\" command");
+        gymGUICommand = builder.defineInRange("gym_gui_command", 3, 0, 4);
+        builder.comment("\"/GymGUI {player}\" command");
+        gymGUICommandOther = builder.defineInRange("gym_gui_command_other", 4, 0, 4);
+        builder.comment("\"/badges\" command");
+        badgesCommand = builder.defineInRange("badges_command", 0, 0, 4);
+        builder.comment("\"/badges {player}\" command");
+        badgesCommandOther = builder.defineInRange("badges_command_other", 0, 0, 4);
+        builder.comment("\"/badges {player} add {badge}\" command");
+        badgesAddCommand = builder.defineInRange("badges_add_command", 3, 0, 4);
+        builder.comment("\"/badges {player} remove {badge}\" command");
+        badgesRemoveCommand = builder.defineInRange("badges_remove_command", 3, 0, 4);
+        builder.comment("\"/GymCommands set {command}\" command (This command could be used maliciously. Such as using \"/stop\" or \"/op {player}\" DO NOT SET THIS LOWER unless you know what your doing!!!");
+        gymCommandsSetCommand = builder.defineInRange("gym_commands_set_command", 4, 0, 4);
+        builder.pop();
         builder.comment("Commands to run when a gym is selected in the GUI.");
         builder.push("GUI_Commands");
         builder.push("Indigo");
@@ -201,8 +228,20 @@ public class Config {
         paldeaDragonGymCommand = builder.define("paldea_dragon_gym_command", DEFAULT_GYM_COMMAND);
         builder.pop();
         builder.pop();
+        builder.push("Dev");
+        builder.comment("\"/badges {player} dev\" command. (displays PlayerBadgeCollection array... only useful for debugging)");
+        badgesDevCommand = builder.defineInRange("badges_dev_command", 4, 0, 4);
         builder.pop();
     }
+
+    public static int getGymGUICommand() { return gymGUICommand.get(); }
+    public static int getGymGUICommandOther() { return gymGUICommandOther.get(); }
+    public static int getBadgesCommand() { return badgesCommand.get(); }
+    public static int getBadgesCommandOther() { return badgesCommandOther.get(); }
+    public static int getBadgesAddCommand() { return badgesAddCommand.get(); }
+    public static int getBadgesRemoveCommand() { return badgesRemoveCommand.get(); }
+    public static int getBadgesDevCommand() { return badgesDevCommand.get(); }
+    public static int getGymCommandsSetCommand() { return gymCommandsSetCommand.get(); }
 
     static void setupCommandMap() {
         GymConfigCommands.put("Indigo_Boulder", indigoBoulderGymCommand);

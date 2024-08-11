@@ -1,5 +1,6 @@
 package com.markflynnman.cobblemon_gyms.commands;
 
+import com.markflynnman.cobblemon_gyms.Config;
 import com.markflynnman.cobblemon_gyms.badgeCollection.PlayerBadgeCollection;
 import com.markflynnman.cobblemon_gyms.badgeCollection.PlayerBadgeCollectionProvider;
 import com.markflynnman.cobblemon_gyms.network.CBadgeCollectionDataSyncPacket;
@@ -19,23 +20,27 @@ import java.util.stream.IntStream;
 
 public class BadgeCollectionCommands {
     public BadgeCollectionCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("badges").executes((command) -> {
+        dispatcher.register(Commands.literal("badges").requires((p) -> {
+            return p.hasPermission(Config.getBadgesCommand());
+        }).executes((command) -> {
             if (command.getSource().getPlayer() != null) {
                 return PlayerBadges(command.getSource(), command.getSource().getPlayer());
             }
             else { return -1; }
-        }).then(Commands.argument("player", EntityArgument.player()).executes((command) -> {
+        }).then(Commands.argument("player", EntityArgument.player()).requires((p) -> {
+            return p.hasPermission(Config.getBadgesCommandOther());
+        }).executes((command) -> {
             return PlayerBadges(command.getSource(), EntityArgument.getPlayer(command, "player"));
         }).then(Commands.literal("dev").requires((p) -> {
-            return p.hasPermission(4);
+            return p.hasPermission(Config.getBadgesDevCommand());
         }).executes((command) -> {
             return PlayerBadges(command.getSource(), EntityArgument.getPlayer(command, "player"), true);
         })).then(Commands.literal("add").requires((p) -> {
-            return p.hasPermission(4);
+            return p.hasPermission(Config.getBadgesAddCommand());
         }).then(Commands.argument("badge", StringArgumentType.word()).suggests(new CobblemonGymsSuggestionProvider()).executes((command) -> {
             return PlayerBadgesAdd(command.getSource(), EntityArgument.getPlayer(command, "player"), StringArgumentType.getString(command, "badge"));
         }))).then(Commands.literal("remove").requires((p) -> {
-            return p.hasPermission(4);
+            return p.hasPermission(Config.getBadgesRemoveCommand());
         }).then(Commands.argument("badge", StringArgumentType.word()).suggests(new CobblemonGymsSuggestionProvider()).executes((command) -> {
             return PlayerBadgesRemove(command.getSource(), EntityArgument.getPlayer(command, "player"), StringArgumentType.getString(command, "badge"));
         })))));

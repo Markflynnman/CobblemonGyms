@@ -1,4 +1,4 @@
-package com.markflynnman.cobblemon_gyms.badgeCollection;
+package com.markflynnman.cobblemon_gyms.capabilities;
 
 import net.minecraft.nbt.CompoundTag;
 

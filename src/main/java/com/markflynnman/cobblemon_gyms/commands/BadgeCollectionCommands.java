@@ -1,8 +1,8 @@
 package com.markflynnman.cobblemon_gyms.commands;
 
 import com.markflynnman.cobblemon_gyms.Config;
-import com.markflynnman.cobblemon_gyms.badgeCollection.PlayerBadgeCollection;
-import com.markflynnman.cobblemon_gyms.badgeCollection.PlayerBadgeCollectionProvider;
+import com.markflynnman.cobblemon_gyms.capabilities.PlayerBadgeCollection;
+import com.markflynnman.cobblemon_gyms.capabilities.PlayerBadgeCollectionProvider;
 import com.markflynnman.cobblemon_gyms.network.CBadgeCollectionDataSyncPacket;
 import com.markflynnman.cobblemon_gyms.network.PacketHandler;
 import com.mojang.brigadier.CommandDispatcher;

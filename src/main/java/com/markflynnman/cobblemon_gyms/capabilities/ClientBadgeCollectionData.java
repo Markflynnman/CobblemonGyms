@@ -1,4 +1,4 @@
-package com.markflynnman.cobblemon_gyms.badgeCollection;
+package com.markflynnman.cobblemon_gyms.capabilities;
 
 public class ClientBadgeCollectionData {
     private static int[] playerBadgeCollection;

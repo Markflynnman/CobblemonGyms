@@ -128,7 +128,7 @@ public class Config {
         badgesAddCommand = builder.defineInRange("badges_add_command", 3, 0, 4);
         builder.comment("\"/badges {player} remove {badge}\" command");
         badgesRemoveCommand = builder.defineInRange("badges_remove_command", 3, 0, 4);
-        builder.comment("\"/GymCommands set {command}\" command (This command could be used maliciously. Such as using \"/stop\" or \"/op {player}\" DO NOT SET THIS LOWER unless you know what your doing!!!");
+        builder.comment("\"/GymCommands set {command}\" command (This command could be used maliciously. Such as using \"/stop\" or \"/op {player}\" DO NOT SET THIS LOWER unless you know what your doing!!!)");
         gymCommandsSetCommand = builder.defineInRange("gym_commands_set_command", 4, 0, 4);
         builder.pop();
         builder.comment("Commands to run when a gym is selected in the GUI.");

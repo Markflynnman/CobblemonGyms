@@ -184,7 +184,7 @@ public class CobblemonGymsGUI extends AbstractContainerScreen<CobblemonGymsMenu>
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
 
-        FormattedCharSequence title = Component.translatable("gui.cobblemongyms.gym").getVisualOrderText();
+        FormattedCharSequence title = Component.translatable("gui.cobblemon_gyms.gym").getVisualOrderText();
         guiGraphics.drawString(this.font, title, width/2 - this.font.width(title)/2, ((height-bgHeight)/2)+5, 4210752, false);
     }
 }

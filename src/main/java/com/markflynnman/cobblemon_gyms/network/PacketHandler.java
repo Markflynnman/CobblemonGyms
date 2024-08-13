@@ -7,8 +7,6 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
-import java.util.function.Supplier;
-
 public class PacketHandler {
     private static final String PROTOCOL_VERSION = "1";
     public static int id = 0;
@@ -36,6 +34,12 @@ public class PacketHandler {
                 .encoder(CBadgeCollectionDataSyncPacket::encode)
                 .decoder(CBadgeCollectionDataSyncPacket::new)
                 .consumerMainThread(CBadgeCollectionDataSyncPacket::handle)
+                .add();
+        id++;
+        INSTANCE.messageBuilder(CStarterPokemonDataSyncPacket.class, id)
+                .encoder(CStarterPokemonDataSyncPacket::encode)
+                .decoder(CStarterPokemonDataSyncPacket::new)
+                .consumerMainThread(CStarterPokemonDataSyncPacket::handle)
                 .add();
         id++;
     }

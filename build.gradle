@@ -61,7 +61,6 @@ minecraft {
     runs {
         // applies to all the run configs below
         configureEach {
-            workingDirectory project.file('run')
 
             // Recommended logging data for a userdev environment
             // The markers can be added/remove as needed separated by commas.
@@ -83,6 +82,8 @@ minecraft {
         }
 
         client {
+            workingDirectory project.file('run')
+
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             property 'forge.enabledGameTestNamespaces', mod_id
             property 'mixin.env.remapRefMap', 'true'
@@ -90,8 +91,12 @@ minecraft {
         }
 
         server {
+            workingDirectory project.file('run-server')
+
             property 'forge.enabledGameTestNamespaces', mod_id
             args '--nogui'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
         }
 
         // This run config launches GameTestServer and runs all registered gametests, then exits.
@@ -99,6 +104,8 @@ minecraft {
         // The gametest system is also enabled by default for other run configs under the /test command.
         gameTestServer {
             property 'forge.enabledGameTestNamespaces', mod_id
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
         }
 
         data {
@@ -107,6 +114,8 @@ minecraft {
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
             args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
         }
     }
 }
@@ -178,9 +187,9 @@ dependencies {
     implementation fg.deobf("curse.maven:jade-324717:${jade_id}")
     implementation fg.deobf("maven.modrinth:kotlin-for-forge:${kotlin_version}")
 
-//    implementation fg.deobf("maven.modrinth:architectury-api:${architectury_api_version}")
-//    implementation fg.deobf("maven.modrinth:cobblemon:${cobblemon_version}")
-//    implementation fg.deobf("maven.modrinth:cobblemontrainers:${cobblemon_trainers_version}")
+    implementation fg.deobf("maven.modrinth:architectury-api:${architectury_api_version}")
+    implementation fg.deobf("maven.modrinth:cobblemon:${cobblemon_version}")
+    implementation fg.deobf("maven.modrinth:cobblemontrainers:${cobblemon_trainers_version}")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

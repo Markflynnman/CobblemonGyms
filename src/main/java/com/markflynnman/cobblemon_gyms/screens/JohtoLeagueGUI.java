@@ -1,8 +1,8 @@
 package com.markflynnman.cobblemon_gyms.screens;
 
 import com.markflynnman.cobblemon_gyms.CobblemonGyms;
-import com.markflynnman.cobblemon_gyms.badgeCollection.ClientBadgeCollectionData;
-import com.markflynnman.cobblemon_gyms.badgeCollection.PlayerBadgeCollection;
+import com.markflynnman.cobblemon_gyms.capabilities.ClientBadgeCollectionData;
+import com.markflynnman.cobblemon_gyms.capabilities.PlayerBadgeCollection;
 import com.markflynnman.cobblemon_gyms.components.CobblemonGymsGUITools;
 import com.markflynnman.cobblemon_gyms.components.ItemButton;
 import com.markflynnman.cobblemon_gyms.items.GymBadges;
@@ -171,7 +171,7 @@ public class JohtoLeagueGUI extends AbstractContainerScreen<JohtoLeagueMenu> {
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
 
-        FormattedCharSequence title = Component.translatable("gui.cobblemongyms.johto").getVisualOrderText();
+        FormattedCharSequence title = Component.translatable("gui.cobblemon_gyms.johto").getVisualOrderText();
         guiGraphics.drawString(this.font, title, width/2 - this.font.width(title)/2, ((height-bgHeight)/2)+5, 4210752, false);
     }
 

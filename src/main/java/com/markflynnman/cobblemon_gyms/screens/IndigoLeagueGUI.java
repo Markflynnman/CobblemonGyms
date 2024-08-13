@@ -1,8 +1,8 @@
 package com.markflynnman.cobblemon_gyms.screens;
 
 import com.markflynnman.cobblemon_gyms.CobblemonGyms;
-import com.markflynnman.cobblemon_gyms.badgeCollection.ClientBadgeCollectionData;
-import com.markflynnman.cobblemon_gyms.badgeCollection.PlayerBadgeCollection;
+import com.markflynnman.cobblemon_gyms.capabilities.ClientBadgeCollectionData;
+import com.markflynnman.cobblemon_gyms.capabilities.PlayerBadgeCollection;
 import com.markflynnman.cobblemon_gyms.components.CobblemonGymsGUITools;
 import com.markflynnman.cobblemon_gyms.components.ItemButton;
 import com.markflynnman.cobblemon_gyms.items.GymBadges;
@@ -171,7 +171,7 @@ public class IndigoLeagueGUI extends AbstractContainerScreen<IndigoLeagueMenu> {
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
 
-        FormattedCharSequence title = Component.translatable("gui.cobblemongyms.indigo").getVisualOrderText();
+        FormattedCharSequence title = Component.translatable("gui.cobblemon_gyms.indigo").getVisualOrderText();
         guiGraphics.drawString(this.font, title, width/2 - this.font.width(title)/2, ((height-bgHeight)/2)+5, 4210752, false);
     }
 

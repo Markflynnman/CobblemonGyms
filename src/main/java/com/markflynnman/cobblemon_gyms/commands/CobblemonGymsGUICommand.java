@@ -1,7 +1,7 @@
 package com.markflynnman.cobblemon_gyms.commands;
 
 import com.markflynnman.cobblemon_gyms.Config;
-import com.markflynnman.cobblemon_gyms.badgeCollection.PlayerBadgeCollectionProvider;
+import com.markflynnman.cobblemon_gyms.capabilities.PlayerBadgeCollectionProvider;
 import com.markflynnman.cobblemon_gyms.menus.CobblemonGymsMenu;
 import com.markflynnman.cobblemon_gyms.network.CBadgeCollectionDataSyncPacket;
 import com.markflynnman.cobblemon_gyms.network.PacketHandler;

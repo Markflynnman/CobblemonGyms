@@ -1,6 +1,6 @@
 package com.markflynnman.cobblemon_gyms.network;
 
-import com.markflynnman.cobblemon_gyms.badgeCollection.PlayerBadgeCollectionProvider;
+import com.markflynnman.cobblemon_gyms.capabilities.PlayerBadgeCollectionProvider;
 import com.markflynnman.cobblemon_gyms.menus.*;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;

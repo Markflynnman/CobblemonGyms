@@ -21,7 +21,14 @@ public class CobblemonGymsSuggestionProvider implements SuggestionProvider<Comma
         Set<String> gyms = Config.GymConfigCommands.keySet();
 
         Objects.requireNonNull(builder);
-        gyms.forEach(builder::suggest);
+        for (String gym : gyms) {
+            if (gym.startsWith(builder.getRemaining().toLowerCase())) {
+                builder.suggest(gym);
+            }
+            else if (gym.contains(builder.getRemaining().toLowerCase())) {
+                builder.suggest(gym);
+            }
+        }
         return builder.buildFuture();
     }
 }

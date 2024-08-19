@@ -8,7 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 public class GymSelectionCommand {
     public GymSelectionCommand(String pGym_ID, ServerPlayer pPlayer) {
-        String command = Config.GymConfigCommands.get(pGym_ID).get();
+        String command = Config.getGymCommand(pGym_ID);
 
         CommandSourceStack source = pPlayer.server.createCommandSourceStack().withSuppressedOutput().withPermission(4);
         CommandDispatcher<CommandSourceStack> commandDispatcher = pPlayer.getServer().getCommands().getDispatcher();

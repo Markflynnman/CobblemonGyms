@@ -4,8 +4,8 @@ import com.cobblemon.mod.common.api.Priority;
 import com.cobblemon.mod.common.api.events.CobblemonEvents;
 import com.cobblemon.mod.common.api.events.starter.StarterChosenEvent;
 import com.markflynnman.cobblemon_gyms.data_attachments.*;
-//import com.markflynnman.cobblemon_gyms.commands.BadgeCollectionCommands;
-//import com.markflynnman.cobblemon_gyms.commands.CobblemonGymsCommands;
+import com.markflynnman.cobblemon_gyms.commands.BadgeCollectionCommands;
+import com.markflynnman.cobblemon_gyms.commands.CobblemonGymsCommands;
 import com.markflynnman.cobblemon_gyms.items.GymBadges;
 import com.markflynnman.cobblemon_gyms.items.ModCreativeModTabs;
 //import com.markflynnman.cobblemon_gyms.menus.ModMenuTypes;
@@ -78,8 +78,8 @@ public class CobblemonGyms
     public static class ModEvents {
         @SubscribeEvent
         public static void RegisterCommands(RegisterCommandsEvent event) {
-//            new CobblemonGymsCommands(event.getDispatcher());
-//            new BadgeCollectionCommands(event.getDispatcher());
+            new CobblemonGymsCommands(event.getDispatcher());
+            new BadgeCollectionCommands(event.getDispatcher());
 
             ConfigCommand.register(event.getDispatcher());
         }

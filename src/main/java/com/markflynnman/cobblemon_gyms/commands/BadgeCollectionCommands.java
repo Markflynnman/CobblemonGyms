@@ -1,0 +1,168 @@
+package com.markflynnman.cobblemon_gyms.commands;
+
+import com.markflynnman.cobblemon_gyms.Config;
+import com.markflynnman.cobblemon_gyms.data_attachments.Attachments;
+import com.markflynnman.cobblemon_gyms.data_attachments.PlayerBadgeCollection;
+import com.markflynnman.cobblemon_gyms.network.CBadgeCollectionDataSyncPacket;
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.neoforged.neoforge.network.PacketDistributor;
+
+import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.IntStream;
+
+public class BadgeCollectionCommands {
+    public BadgeCollectionCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
+        dispatcher.register(Commands.literal("badges").requires((p) -> {
+            return p.hasPermission(Config.getBadgesCommand());
+        }).executes((command) -> {
+            if (command.getSource().getPlayer() != null) {
+                return PlayerBadges(command.getSource(), command.getSource().getPlayer());
+            }
+            else { return -1; }
+        }).then(Commands.argument("player", EntityArgument.player()).requires((p) -> {
+            return p.hasPermission(Config.getBadgesCommandOther());
+        }).executes((command) -> {
+            return PlayerBadges(command.getSource(), EntityArgument.getPlayer(command, "player"));
+        }).then(Commands.literal("dev").requires((p) -> {
+            return p.hasPermission(Config.getBadgesDevCommand());
+        }).executes((command) -> {
+            return PlayerBadges(command.getSource(), EntityArgument.getPlayer(command, "player"), true);
+        })).then(Commands.literal("add").requires((p) -> {
+            return p.hasPermission(Config.getBadgesAddCommand());
+        }).then(Commands.argument("badge", StringArgumentType.word()).suggests(new CobblemonGymsSuggestionProvider()).executes((command) -> {
+            return PlayerBadgesAdd(command.getSource(), EntityArgument.getPlayer(command, "player"), StringArgumentType.getString(command, "badge"));
+        }))).then(Commands.literal("remove").requires((p) -> {
+            return p.hasPermission(Config.getBadgesRemoveCommand());
+        }).then(Commands.argument("badge", StringArgumentType.word()).suggests(new CobblemonGymsSuggestionProvider()).executes((command) -> {
+            return PlayerBadgesRemove(command.getSource(), EntityArgument.getPlayer(command, "player"), StringArgumentType.getString(command, "badge"));
+        })))));
+    }
+
+    private int PlayerBadges(CommandSourceStack source, ServerPlayer pPlayer) throws CommandSyntaxException {
+        return PlayerBadges(source, pPlayer, false);
+    }
+
+    private int PlayerBadges(CommandSourceStack source, ServerPlayer pPlayer, boolean dev) throws CommandSyntaxException {
+        String player_name = pPlayer.getName().toString().replace("literal{", "").replace("}", "");
+
+        if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)) {
+            PacketDistributor.sendToPlayer(pPlayer, new CBadgeCollectionDataSyncPacket(PlayerBadgeCollection.toByteArray(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).getBadgeCollection())));
+        }
+//        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
+//            PacketHandler.sendToPlayer(new CBadgeCollectionDataSyncPacket(badgeCollection.getBadgeCollection()), pPlayer);
+//        });
+
+        if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)) {
+            String output;
+            PlayerBadgeCollection badgeCollection = pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION);
+
+            int[] badges = IntStream.range(0, badgeCollection.getBadgeCollection().length)
+                    .filter(i -> badgeCollection.getBadgeCollection()[i] == 1)
+                    .toArray();
+
+            output = BadgeString(badges, (source.getPlayer() == pPlayer) ? "" : player_name);
+
+            source.sendSuccess(() -> {
+                if (dev) {
+                    return Component.literal(((source.getPlayer() == pPlayer) ? "Your" : player_name) +" badges:\n"+ output + "\n" + Arrays.toString(badgeCollection.getBadgeCollection()));
+                }
+                return Component.literal(((source.getPlayer() == pPlayer) ? "Your" : player_name) +" badges:\n"+ output);
+            }, false);
+        }
+//        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
+//            String output;
+//            int[] badges = IntStream.range(0, badgeCollection.getBadgeCollection().length)
+//                    .filter(i -> badgeCollection.getBadgeCollection()[i] == 1)
+//                    .toArray();
+//
+//            output = BadgeString(badges, (source.getPlayer() == pPlayer) ? "" : player_name);
+//
+//            source.sendSuccess(() -> {
+//                if (dev) {
+//                    return Component.literal(((source.getPlayer() == pPlayer) ? "Your" : player_name) +" badges:\n"+ output + "\n" + Arrays.toString(badgeCollection.getBadgeCollection()));
+//                }
+//                return Component.literal(((source.getPlayer() == pPlayer) ? "Your" : player_name) +" badges:\n"+ output);
+//            }, false);
+//        });
+
+        return 1;
+    }
+
+    private int PlayerBadgesAdd(CommandSourceStack source, ServerPlayer pPlayer, String badge) throws CommandSyntaxException {
+        AtomicBoolean response = new AtomicBoolean(false);
+        if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)){
+            response.set(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).addBadge(badge));
+        }
+//        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
+//            response.set(badgeCollection.addBadge(badge));
+//        });
+
+        if (response.get()) {
+            source.sendSuccess(() -> {
+                return Component.literal("ADD: "+badge);
+            }, true);
+            return 1;
+        }
+        else {
+            source.sendFailure(Component.literal("Could not find badge: "+badge));
+            return -1;
+        }
+    }
+
+    private int PlayerBadgesRemove(CommandSourceStack source, ServerPlayer pPlayer, String badge) throws CommandSyntaxException {
+        AtomicBoolean response = new AtomicBoolean(false);
+        if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)) {
+            response.set(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).removeBadge(badge));
+        }
+//        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
+//            response.set(badgeCollection.removeBadge(badge));
+//        });
+
+        if (response.get()) {
+            source.sendSuccess(() -> {
+                return Component.literal("REMOVE: "+badge);
+            }, true);
+            return 1;
+        }
+        else {
+            source.sendFailure(Component.literal("Could not find badge: "+badge));
+            return -1;
+        }
+    }
+
+    private String BadgeString(int[] badges, String player) {
+        StringBuilder output = new StringBuilder();
+
+        if (badges.length == 0) {
+            if (player.isEmpty()) {
+                output = new StringBuilder("You have no badges. :(");
+            }
+            else {
+                output = new StringBuilder(player + " has no badges.");
+            }
+            return output.toString();
+        }
+
+        for (int i = 0; i < badges.length; i++) {
+            String[] badge = PlayerBadgeCollection.AllBadges.get(badges[i]).split("_");
+            if (i == 0) {
+                output = new StringBuilder(badge[0] + ":\n    " + badge[1]);
+                continue;
+            }
+            if (!badge[0].equals(PlayerBadgeCollection.AllBadges.get(badges[i-1]).split("_")[0])) {
+                output.append("\n").append(badge[0]).append(":");
+            }
+            output.append("\n    ").append(badge[1]);
+        }
+
+        return output.toString();
+    }
+}

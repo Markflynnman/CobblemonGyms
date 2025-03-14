@@ -3,7 +3,7 @@ package com.markflynnman.cobblemon_gyms.network;
 import com.markflynnman.cobblemon_gyms.CobblemonGyms;
 import com.markflynnman.cobblemon_gyms.data_attachments.Attachments;
 import com.markflynnman.cobblemon_gyms.data_attachments.PlayerBadgeCollection;
-//import com.markflynnman.cobblemon_gyms.menus.*;
+import com.markflynnman.cobblemon_gyms.menus.*;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -37,68 +37,68 @@ public record SOpenScreenPacket(String screen) implements CustomPacketPayload {
             ServerPlayer serverPlayer = (ServerPlayer)context.player();
 
             if (serverPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)) {
-                PacketDistributor.sendToPlayer(serverPlayer, new CBadgeCollectionDataSyncPacket(PlayerBadgeCollection.toByteArray(serverPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).getBadgeCollection())));
+                PacketDistributor.sendToPlayer(serverPlayer, new CBadgeCollectionDataSyncPacket(serverPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).getBadgeCollection()));
             }
 
-//            switch (packet.screen) {
-//                case "indigo_league_gui":
-//                    serverPlayer.openMenu(new SimpleMenuProvider(
-//                            (contentId, playerInventory, player) -> new IndigoLeagueMenu(contentId, playerInventory),
-//                            Component.literal("Indigo League GUI")
-//                    ));
-//                    serverPlayer.openMenu(new SimpleMenuProvider(
-//                            (contentId, playerInventory, player) -> new IndigoLeagueMenu(contentId, playerInventory),
-//                            Component.literal("Indigo League GUI")
-//                    ));
-//                    break;
-//                case "johto_league_gui":
-//                    serverPlayer.openMenu(new SimpleMenuProvider(
-//                            (contentId, playerInventory, player) -> new JohtoLeagueMenu(contentId, playerInventory),
-//                            Component.literal("Johto League GUI")
-//                    ));
-//                    break;
-//                case "hoenn_league_gui":
-//                    serverPlayer.openMenu(new SimpleMenuProvider(
-//                            (contentId, playerInventory, player) -> new HoennLeagueMenu(contentId, playerInventory),
-//                            Component.literal("Indigo League GUI")
-//                    ));
-//                    break;
-//                case "sinnoh_league_gui":
-//                    serverPlayer.openMenu(new SimpleMenuProvider(
-//                            (contentId, playerInventory, player) -> new SinnohLeagueMenu(contentId, playerInventory),
-//                            Component.literal("Indigo League GUI")
-//                    ));
-//                    break;
-//                case "unova_league_gui":
-//                    serverPlayer.openMenu(new SimpleMenuProvider(
-//                            (contentId, playerInventory, player) -> new UnovaLeagueMenu(contentId, playerInventory),
-//                            Component.literal("Indigo League GUI")
-//                    ));
-//                    break;
-//                case "kalos_league_gui":
-//                    serverPlayer.openMenu(new SimpleMenuProvider(
-//                            (contentId, playerInventory, player) -> new KalosLeagueMenu(contentId, playerInventory),
-//                            Component.literal("Indigo League GUI")
-//                    ));
-//                    break;
-//                case "galar_league_gui":
-//                    serverPlayer.openMenu(new SimpleMenuProvider(
-//                            (contentId, playerInventory, player) -> new GalarLeagueMenu(contentId, playerInventory),
-//                            Component.literal("Indigo League GUI")
-//                    ));
-//                    break;
-//                case "paldea_league_gui":
-//                    serverPlayer.openMenu(new SimpleMenuProvider(
-//                            (contentId, playerInventory, player) -> new PaldeaLeagueMenu(contentId, playerInventory),
-//                            Component.literal("Indigo League GUI")
-//                    ));
-//                    break;
-//                default:
-//                    serverPlayer.openMenu(new SimpleMenuProvider(
-//                            (contentId, playerInventory, player) -> new CobblemonGymsMenu(contentId, playerInventory),
-//                            Component.literal("Cobblemon Gyms GUI")
-//                    ));
-//            }
+            switch (packet.screen) {
+                case "indigo_league_gui":
+                    serverPlayer.openMenu(new SimpleMenuProvider(
+                            (contentId, playerInventory, player) -> new IndigoLeagueMenu(contentId, playerInventory),
+                            Component.literal("Indigo League GUI")
+                    ));
+                    serverPlayer.openMenu(new SimpleMenuProvider(
+                            (contentId, playerInventory, player) -> new IndigoLeagueMenu(contentId, playerInventory),
+                            Component.literal("Indigo League GUI")
+                    ));
+                    break;
+                case "johto_league_gui":
+                    serverPlayer.openMenu(new SimpleMenuProvider(
+                            (contentId, playerInventory, player) -> new JohtoLeagueMenu(contentId, playerInventory),
+                            Component.literal("Johto League GUI")
+                    ));
+                    break;
+                case "hoenn_league_gui":
+                    serverPlayer.openMenu(new SimpleMenuProvider(
+                            (contentId, playerInventory, player) -> new HoennLeagueMenu(contentId, playerInventory),
+                            Component.literal("Indigo League GUI")
+                    ));
+                    break;
+                case "sinnoh_league_gui":
+                    serverPlayer.openMenu(new SimpleMenuProvider(
+                            (contentId, playerInventory, player) -> new SinnohLeagueMenu(contentId, playerInventory),
+                            Component.literal("Indigo League GUI")
+                    ));
+                    break;
+                case "unova_league_gui":
+                    serverPlayer.openMenu(new SimpleMenuProvider(
+                            (contentId, playerInventory, player) -> new UnovaLeagueMenu(contentId, playerInventory),
+                            Component.literal("Indigo League GUI")
+                    ));
+                    break;
+                case "kalos_league_gui":
+                    serverPlayer.openMenu(new SimpleMenuProvider(
+                            (contentId, playerInventory, player) -> new KalosLeagueMenu(contentId, playerInventory),
+                            Component.literal("Indigo League GUI")
+                    ));
+                    break;
+                case "galar_league_gui":
+                    serverPlayer.openMenu(new SimpleMenuProvider(
+                            (contentId, playerInventory, player) -> new GalarLeagueMenu(contentId, playerInventory),
+                            Component.literal("Indigo League GUI")
+                    ));
+                    break;
+                case "paldea_league_gui":
+                    serverPlayer.openMenu(new SimpleMenuProvider(
+                            (contentId, playerInventory, player) -> new PaldeaLeagueMenu(contentId, playerInventory),
+                            Component.literal("Indigo League GUI")
+                    ));
+                    break;
+                default:
+                    serverPlayer.openMenu(new SimpleMenuProvider(
+                            (contentId, playerInventory, player) -> new CobblemonGymsMenu(contentId, playerInventory),
+                            Component.literal("Cobblemon Gyms GUI")
+                    ));
+            }
         });
     }
 }

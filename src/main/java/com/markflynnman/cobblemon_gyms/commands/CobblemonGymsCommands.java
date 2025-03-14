@@ -6,7 +6,7 @@ import com.markflynnman.cobblemon_gyms.Config;
 import com.markflynnman.cobblemon_gyms.data_attachments.Attachments;
 import com.markflynnman.cobblemon_gyms.data_attachments.PlayerBadgeCollection;
 import com.markflynnman.cobblemon_gyms.data_attachments.PlayerStarterPokemon;
-//import com.markflynnman.cobblemon_gyms.menus.CobblemonGymsMenu;
+import com.markflynnman.cobblemon_gyms.menus.CobblemonGymsMenu;
 import com.markflynnman.cobblemon_gyms.network.CBadgeCollectionDataSyncPacket;
 import com.markflynnman.cobblemon_gyms.network.PacketHandler;
 import com.mojang.brigadier.CommandDispatcher;
@@ -75,17 +75,16 @@ public class CobblemonGymsCommands {
         LOGGER.warn("Open GUI for "+player_name);
 
         if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)) {
-            PacketDistributor.sendToPlayer(pPlayer, new CBadgeCollectionDataSyncPacket(PlayerBadgeCollection.toByteArray(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).getBadgeCollection())));
+            PacketDistributor.sendToPlayer(pPlayer, new CBadgeCollectionDataSyncPacket(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).getBadgeCollection()));
         }
 //        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
 //            PacketHandler.sendToPlayer(new CBadgeCollectionDataSyncPacket(badgeCollection.getBadgeCollection()), pPlayer);
 //        });
 
-        // ADD BACK WITH MENUS
-//        pPlayer.openMenu(new SimpleMenuProvider(
-//                (contentId, playerInventory, player) -> new CobblemonGymsMenu(contentId, playerInventory),
-//                Component.literal("Cobblemon Gyms GUI")
-//        ));
+        pPlayer.openMenu(new SimpleMenuProvider(
+                (contentId, playerInventory, player) -> new CobblemonGymsMenu(contentId, playerInventory),
+                Component.literal("Cobblemon Gyms GUI")
+        ));
 
         return 1;
     }

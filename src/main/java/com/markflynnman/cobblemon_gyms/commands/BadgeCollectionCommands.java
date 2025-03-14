@@ -54,7 +54,7 @@ public class BadgeCollectionCommands {
         String player_name = pPlayer.getName().toString().replace("literal{", "").replace("}", "");
 
         if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)) {
-            PacketDistributor.sendToPlayer(pPlayer, new CBadgeCollectionDataSyncPacket(PlayerBadgeCollection.toByteArray(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).getBadgeCollection())));
+            PacketDistributor.sendToPlayer(pPlayer, new CBadgeCollectionDataSyncPacket(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).getBadgeCollection()));
         }
 //        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
 //            PacketHandler.sendToPlayer(new CBadgeCollectionDataSyncPacket(badgeCollection.getBadgeCollection()), pPlayer);

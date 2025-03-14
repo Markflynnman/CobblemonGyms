@@ -1,8 +1,10 @@
 package com.markflynnman.cobblemon_gyms.data_attachments;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.neoforged.neoforge.common.util.INBTSerializable;
+import org.slf4j.Logger;
 
 import java.lang.reflect.Array;
 import java.nio.ByteBuffer;
@@ -157,19 +159,27 @@ public class PlayerBadgeCollection implements INBTSerializable<CompoundTag> {
         badgeCollection = nbt.getIntArray("badgeCollection");
     }
 
-    public static byte[] toByteArray(int[] data) {
-        ByteBuffer byteBuffer = ByteBuffer.allocate(data.length * 4);
-        IntBuffer intBuffer = byteBuffer.asIntBuffer();
-        intBuffer.put(data);
+    private static final Logger LOGGER = LogUtils.getLogger();
 
-        return byteBuffer.array();
-    }
-
-    public static int[] toIntArray(byte[] data) {
-        IntBuffer intBuffer = ByteBuffer.wrap(data).order(ByteOrder.BIG_ENDIAN).asIntBuffer();
-        int[] array = new int[intBuffer.remaining()];
-        return intBuffer.get(array).array();
-    }
+//    public static byte[] toByteArray(int[] data) {
+//        LOGGER.info("Starting toByteArray");
+//        ByteBuffer byteBuffer = ByteBuffer.allocate(data.length * 4);
+//        IntBuffer intBuffer = byteBuffer.asIntBuffer();
+//        intBuffer.put(data);
+//
+//        LOGGER.info("Finished toByteArray");
+//        return byteBuffer.array();
+//    }
+//
+//    public static int[] toIntArray(byte[] data) {
+//        LOGGER.info("Starting toIntArray");
+//        IntBuffer intBuffer = ByteBuffer.wrap(data).order(ByteOrder.BIG_ENDIAN).asIntBuffer();
+//        int[] array = new int[intBuffer.remaining()];
+//
+//        intBuffer.get(array);
+//        LOGGER.info("Finished toIntArray");
+//        return ;
+//    }
 
     // Remove
     public void saveNBTData(CompoundTag nbt) {

@@ -1,7 +1,7 @@
 package com.markflynnman.cobblemon_gyms.network;
 
 import com.markflynnman.cobblemon_gyms.CobblemonGyms;
-//import com.markflynnman.cobblemon_gyms.commands.GymSelectionCommand;
+import com.markflynnman.cobblemon_gyms.commands.GymSelectionCommand;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -31,7 +31,7 @@ public record SGymSelectionPacket(String gymID) implements CustomPacketPayload {
             // ON SERVER
             ServerPlayer serverPlayer = (ServerPlayer)context.player();
 
-//            new GymSelectionCommand(packet.gymID, serverPlayer);
+            new GymSelectionCommand(packet.gymID, serverPlayer);
         });
     }
 }

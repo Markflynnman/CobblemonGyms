@@ -8,7 +8,7 @@ import com.markflynnman.cobblemon_gyms.commands.BadgeCollectionCommands;
 import com.markflynnman.cobblemon_gyms.commands.CobblemonGymsCommands;
 import com.markflynnman.cobblemon_gyms.items.GymBadges;
 import com.markflynnman.cobblemon_gyms.items.ModCreativeModTabs;
-//import com.markflynnman.cobblemon_gyms.menus.ModMenuTypes;
+import com.markflynnman.cobblemon_gyms.menus.ModMenuTypes;
 import com.markflynnman.cobblemon_gyms.network.CBadgeCollectionDataSyncPacket;
 import com.markflynnman.cobblemon_gyms.network.CStarterPokemonDataSyncPacket;
 import com.markflynnman.cobblemon_gyms.network.PacketHandler;
@@ -40,7 +40,7 @@ public class CobblemonGyms
     {
 
         ModCreativeModTabs.register(modEventBus);
-//        ModMenuTypes.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
         GymBadges.register(modEventBus);
         Attachments.register(modEventBus);
         modEventBus.addListener(PacketHandler::register);
@@ -91,7 +91,15 @@ public class CobblemonGyms
                     if (player.hasData(Attachments.PLAYER_BADGE_COLLECTION)) {
                         PacketDistributor.sendToPlayer(
                                 player,
-                                new CBadgeCollectionDataSyncPacket(PlayerBadgeCollection.toByteArray(player.getData(Attachments.PLAYER_BADGE_COLLECTION.get()).getBadgeCollection()))
+                                new CBadgeCollectionDataSyncPacket(player.getData(Attachments.PLAYER_BADGE_COLLECTION.get()).getBadgeCollection())
+                        );
+                    }
+                    else {
+                        // Init Badge Collection
+                        player.getData(Attachments.PLAYER_BADGE_COLLECTION);
+                        PacketDistributor.sendToPlayer(
+                                player,
+                                new CBadgeCollectionDataSyncPacket(player.getData(Attachments.PLAYER_BADGE_COLLECTION.get()).getBadgeCollection())
                         );
                     }
 //                    player.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {

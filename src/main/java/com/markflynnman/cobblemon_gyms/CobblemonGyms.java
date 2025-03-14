@@ -6,8 +6,8 @@ import com.cobblemon.mod.common.api.events.starter.StarterChosenEvent;
 //import com.markflynnman.cobblemon_gyms.data_attachments.*;
 //import com.markflynnman.cobblemon_gyms.commands.BadgeCollectionCommands;
 //import com.markflynnman.cobblemon_gyms.commands.CobblemonGymsCommands;
-//import com.markflynnman.cobblemon_gyms.items.GymBadges;
-//import com.markflynnman.cobblemon_gyms.items.ModCreativeModTabs;
+import com.markflynnman.cobblemon_gyms.items.GymBadges;
+import com.markflynnman.cobblemon_gyms.items.ModCreativeModTabs;
 //import com.markflynnman.cobblemon_gyms.menus.ModMenuTypes;
 //import com.markflynnman.cobblemon_gyms.network.CBadgeCollectionDataSyncPacket;
 //import com.markflynnman.cobblemon_gyms.network.CStarterPokemonDataSyncPacket;
@@ -38,9 +38,9 @@ public class CobblemonGyms
     public CobblemonGyms(IEventBus modEventBus, ModContainer modContainer)
     {
 
-//        ModCreativeModTabs.register(modEventBus);
+        ModCreativeModTabs.register(modEventBus);
 //        ModMenuTypes.register(modEventBus);
-//        GymBadges.register(modEventBus);
+        GymBadges.register(modEventBus);
 //        Attachments.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.

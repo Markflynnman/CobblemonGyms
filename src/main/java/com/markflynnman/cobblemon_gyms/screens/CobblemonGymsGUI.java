@@ -6,7 +6,6 @@ import com.markflynnman.cobblemon_gyms.components.EEButton;
 import com.markflynnman.cobblemon_gyms.components.ItemButton;
 import com.markflynnman.cobblemon_gyms.items.GymBadges;
 import com.markflynnman.cobblemon_gyms.menus.CobblemonGymsMenu;
-import com.markflynnman.cobblemon_gyms.network.PacketHandler;
 import com.markflynnman.cobblemon_gyms.network.SOpenScreenPacket;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -181,7 +180,7 @@ public class CobblemonGymsGUI extends AbstractContainerScreen<CobblemonGymsMenu>
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        renderBackground(guiGraphics, mouseX, mouseY, delta);
+//        renderBackground(guiGraphics, mouseX, mouseY, delta);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
 

@@ -99,7 +99,7 @@ public class BadgeCollectionCommands {
     private int PlayerBadgesAdd(CommandSourceStack source, ServerPlayer pPlayer, String badge) throws CommandSyntaxException {
         AtomicBoolean response = new AtomicBoolean(false);
         if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)){
-            response.set(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).addBadge(badge));
+            response.set(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).addBadge(badge.toLowerCase()));
         }
 //        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
 //            response.set(badgeCollection.addBadge(badge));
@@ -120,7 +120,7 @@ public class BadgeCollectionCommands {
     private int PlayerBadgesRemove(CommandSourceStack source, ServerPlayer pPlayer, String badge) throws CommandSyntaxException {
         AtomicBoolean response = new AtomicBoolean(false);
         if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)) {
-            response.set(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).removeBadge(badge));
+            response.set(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).removeBadge(badge.toLowerCase()));
         }
 //        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
 //            response.set(badgeCollection.removeBadge(badge));

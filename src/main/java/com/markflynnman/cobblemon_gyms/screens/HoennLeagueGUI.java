@@ -7,7 +7,6 @@ import com.markflynnman.cobblemon_gyms.components.CobblemonGymsGUITools;
 import com.markflynnman.cobblemon_gyms.components.ItemButton;
 import com.markflynnman.cobblemon_gyms.items.GymBadges;
 import com.markflynnman.cobblemon_gyms.menus.HoennLeagueMenu;
-import com.markflynnman.cobblemon_gyms.network.PacketHandler;
 import com.markflynnman.cobblemon_gyms.network.SGymSelectionPacket;
 import com.markflynnman.cobblemon_gyms.network.SOpenScreenPacket;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -67,7 +66,7 @@ public class HoennLeagueGUI extends AbstractContainerScreen<HoennLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Hoenn_Stone"); },
+                onPress -> { gymSelect("hoenn_stone"); },
                 new ItemStack(GymBadges.STONE_BADGE.get()),
                 false
         ));
@@ -78,9 +77,9 @@ public class HoennLeagueGUI extends AbstractContainerScreen<HoennLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Hoenn_Knuckle"); },
+                onPress -> { gymSelect("hoenn_knuckle"); },
                 new ItemStack(GymBadges.KNUCKLE_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Hoenn_Knuckle")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("hoenn_knuckle")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -89,9 +88,9 @@ public class HoennLeagueGUI extends AbstractContainerScreen<HoennLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Hoenn_Dynamo"); },
+                onPress -> { gymSelect("hoenn_dynamo"); },
                 new ItemStack(GymBadges.DYNAMO_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Hoenn_Dynamo")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("hoenn_dynamo")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -100,9 +99,9 @@ public class HoennLeagueGUI extends AbstractContainerScreen<HoennLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Hoenn_Heat"); },
+                onPress -> { gymSelect("hoenn_heat"); },
                 new ItemStack(GymBadges.HEAT_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Hoenn_Heat")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("hoenn_heat")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -111,9 +110,9 @@ public class HoennLeagueGUI extends AbstractContainerScreen<HoennLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Hoenn_Balance"); },
+                onPress -> { gymSelect("hoenn_balance"); },
                 new ItemStack(GymBadges.BALANCE_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Hoenn_Balance")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("hoenn_balance")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -122,9 +121,9 @@ public class HoennLeagueGUI extends AbstractContainerScreen<HoennLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Hoenn_Feather"); },
+                onPress -> { gymSelect("hoenn_feather"); },
                 new ItemStack(GymBadges.FEATHER_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Hoenn_Feather")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("hoenn_feather")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -133,9 +132,9 @@ public class HoennLeagueGUI extends AbstractContainerScreen<HoennLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Hoenn_Mind"); },
+                onPress -> { gymSelect("hoenn_mind"); },
                 new ItemStack(GymBadges.MIND_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Hoenn_Mind")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("hoenn_mind")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -144,9 +143,9 @@ public class HoennLeagueGUI extends AbstractContainerScreen<HoennLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Hoenn_Rain"); },
+                onPress -> { gymSelect("hoenn_rain"); },
                 new ItemStack(GymBadges.RAIN_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Hoenn_Rain")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("hoenn_rain")-1] == 0
         ));
     }
 
@@ -168,7 +167,7 @@ public class HoennLeagueGUI extends AbstractContainerScreen<HoennLeagueMenu> {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        renderBackground(guiGraphics, mouseX, mouseY, delta);
+//        renderBackground(guiGraphics, mouseX, mouseY, delta);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
 

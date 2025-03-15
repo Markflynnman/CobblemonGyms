@@ -7,7 +7,6 @@ import com.markflynnman.cobblemon_gyms.components.CobblemonGymsGUITools;
 import com.markflynnman.cobblemon_gyms.components.ItemButton;
 import com.markflynnman.cobblemon_gyms.items.GymBadges;
 import com.markflynnman.cobblemon_gyms.menus.GalarLeagueMenu;
-import com.markflynnman.cobblemon_gyms.network.PacketHandler;
 import com.markflynnman.cobblemon_gyms.network.SGymSelectionPacket;
 import com.markflynnman.cobblemon_gyms.network.SOpenScreenPacket;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -69,7 +68,7 @@ public class GalarLeagueGUI extends AbstractContainerScreen<GalarLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Galar_Grass"); },
+                onPress -> { gymSelect("galar_grass"); },
                 new ItemStack(GymBadges.SAS_GRASS_BADGE.get()),
                 false
         ));
@@ -80,9 +79,9 @@ public class GalarLeagueGUI extends AbstractContainerScreen<GalarLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Galar_Water"); },
+                onPress -> { gymSelect("galar_water"); },
                 new ItemStack(GymBadges.SAS_WATER_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Galar_Water")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("galar_water")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -91,9 +90,9 @@ public class GalarLeagueGUI extends AbstractContainerScreen<GalarLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Galar_Fire"); },
+                onPress -> { gymSelect("galar_fire"); },
                 new ItemStack(GymBadges.SAS_FIRE_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Galar_Fire")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("galar_fire")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -102,9 +101,9 @@ public class GalarLeagueGUI extends AbstractContainerScreen<GalarLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Galar_Fighting"); },
+                onPress -> { gymSelect("galar_fighting"); },
                 new ItemStack(GymBadges.SAS_FIGHTING_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Galar_Fighting")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("galar_fighting")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -113,9 +112,9 @@ public class GalarLeagueGUI extends AbstractContainerScreen<GalarLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Galar_Ghost"); },
+                onPress -> { gymSelect("galar_ghost"); },
                 new ItemStack(GymBadges.SAS_GHOST_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Galar_Ghost")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("galar_ghost")-1] == 0
         ));
 
         // Bottom
@@ -126,9 +125,9 @@ public class GalarLeagueGUI extends AbstractContainerScreen<GalarLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Galar_Fairy"); },
+                onPress -> { gymSelect("galar_fairy"); },
                 new ItemStack(GymBadges.SAS_FAIRY_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Galar_Fairy")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("galar_fairy")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -137,9 +136,9 @@ public class GalarLeagueGUI extends AbstractContainerScreen<GalarLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Galar_Rock"); },
+                onPress -> { gymSelect("galar_rock"); },
                 new ItemStack(GymBadges.SAS_ROCK_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Galar_Rock")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("galar_rock")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -148,9 +147,9 @@ public class GalarLeagueGUI extends AbstractContainerScreen<GalarLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Galar_Ice"); },
+                onPress -> { gymSelect("galar_ice"); },
                 new ItemStack(GymBadges.SAS_ICE_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Galar_Ice")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("galar_ice")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -159,9 +158,9 @@ public class GalarLeagueGUI extends AbstractContainerScreen<GalarLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Galar_Dark"); },
+                onPress -> { gymSelect("galar_dark"); },
                 new ItemStack(GymBadges.SAS_DARK_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Galar_Dark")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("galar_dark")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -170,9 +169,9 @@ public class GalarLeagueGUI extends AbstractContainerScreen<GalarLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Galar_Dragon"); },
+                onPress -> { gymSelect("galar_dragon"); },
                 new ItemStack(GymBadges.SAS_DRAGON_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Galar_Dragon")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("galar_dragon")-1] == 0
         ));
     }
 
@@ -194,7 +193,7 @@ public class GalarLeagueGUI extends AbstractContainerScreen<GalarLeagueMenu> {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        renderBackground(guiGraphics, mouseX, mouseY, delta);
+//        renderBackground(guiGraphics, mouseX, mouseY, delta);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
 

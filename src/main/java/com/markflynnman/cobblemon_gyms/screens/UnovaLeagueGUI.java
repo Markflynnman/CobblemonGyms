@@ -7,7 +7,6 @@ import com.markflynnman.cobblemon_gyms.components.CobblemonGymsGUITools;
 import com.markflynnman.cobblemon_gyms.components.ItemButton;
 import com.markflynnman.cobblemon_gyms.items.GymBadges;
 import com.markflynnman.cobblemon_gyms.menus.UnovaLeagueMenu;
-import com.markflynnman.cobblemon_gyms.network.PacketHandler;
 import com.markflynnman.cobblemon_gyms.network.SGymSelectionPacket;
 import com.markflynnman.cobblemon_gyms.network.SOpenScreenPacket;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -69,7 +68,7 @@ public class UnovaLeagueGUI extends AbstractContainerScreen<UnovaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Unova_Trio"); },
+                onPress -> { gymSelect("unova_trio"); },
                 new ItemStack(GymBadges.TRIO_BADGE.get()),
                 false
         ));
@@ -80,9 +79,9 @@ public class UnovaLeagueGUI extends AbstractContainerScreen<UnovaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Unova_Basic"); },
+                onPress -> { gymSelect("unova_basic"); },
                 new ItemStack(GymBadges.BASIC_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Unova_Basic")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("unova_basic")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -91,9 +90,9 @@ public class UnovaLeagueGUI extends AbstractContainerScreen<UnovaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Unova_Toxic"); },
+                onPress -> { gymSelect("unova_toxic"); },
                 new ItemStack(GymBadges.TOXIC_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Unova_Toxic")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("unova_toxic")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -102,9 +101,9 @@ public class UnovaLeagueGUI extends AbstractContainerScreen<UnovaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Unova_Insect"); },
+                onPress -> { gymSelect("unova_insect"); },
                 new ItemStack(GymBadges.INSECT_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Unova_Insect")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("unova_insect")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -113,9 +112,9 @@ public class UnovaLeagueGUI extends AbstractContainerScreen<UnovaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Unova_Bolt"); },
+                onPress -> { gymSelect("unova_bolt"); },
                 new ItemStack(GymBadges.BOLT_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Unova_Bolt")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("unova_bolt")-1] == 0
         ));
 
         // Bottom
@@ -126,9 +125,9 @@ public class UnovaLeagueGUI extends AbstractContainerScreen<UnovaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Unova_Quake"); },
+                onPress -> { gymSelect("unova_quake"); },
                 new ItemStack(GymBadges.QUAKE_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Unova_Quake")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("unova_quake")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -137,9 +136,9 @@ public class UnovaLeagueGUI extends AbstractContainerScreen<UnovaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Unova_Jet"); },
+                onPress -> { gymSelect("unova_jet"); },
                 new ItemStack(GymBadges.JET_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Unova_Jet")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("unova_jet")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -148,9 +147,9 @@ public class UnovaLeagueGUI extends AbstractContainerScreen<UnovaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Unova_Freeze"); },
+                onPress -> { gymSelect("unova_freeze"); },
                 new ItemStack(GymBadges.FREEZE_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Unova_Freeze")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("unova_freeze")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -159,9 +158,9 @@ public class UnovaLeagueGUI extends AbstractContainerScreen<UnovaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Unova_Legend"); },
+                onPress -> { gymSelect("unova_legend"); },
                 new ItemStack(GymBadges.LEGEND_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Unova_Legend")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("unova_legend")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -170,9 +169,9 @@ public class UnovaLeagueGUI extends AbstractContainerScreen<UnovaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Unova_Wave"); },
+                onPress -> { gymSelect("unova_wave"); },
                 new ItemStack(GymBadges.WAVE_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Unova_Wave")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("unova_wave")-1] == 0
         ));
     }
 
@@ -194,7 +193,7 @@ public class UnovaLeagueGUI extends AbstractContainerScreen<UnovaLeagueMenu> {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        renderBackground(guiGraphics, mouseX, mouseY, delta);
+//        renderBackground(guiGraphics, mouseX, mouseY, delta);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
 

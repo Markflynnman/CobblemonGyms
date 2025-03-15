@@ -7,7 +7,6 @@ import com.markflynnman.cobblemon_gyms.components.CobblemonGymsGUITools;
 import com.markflynnman.cobblemon_gyms.components.ItemButton;
 import com.markflynnman.cobblemon_gyms.items.GymBadges;
 import com.markflynnman.cobblemon_gyms.menus.JohtoLeagueMenu;
-import com.markflynnman.cobblemon_gyms.network.PacketHandler;
 import com.markflynnman.cobblemon_gyms.network.SGymSelectionPacket;
 import com.markflynnman.cobblemon_gyms.network.SOpenScreenPacket;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -67,7 +66,7 @@ public class JohtoLeagueGUI extends AbstractContainerScreen<JohtoLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Johto_Zephyr"); },
+                onPress -> { gymSelect("johto_zephyr"); },
                 new ItemStack(GymBadges.ZEPHYR_BADGE.get()),
                 false
         ));
@@ -78,9 +77,9 @@ public class JohtoLeagueGUI extends AbstractContainerScreen<JohtoLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Johto_Hive"); },
+                onPress -> { gymSelect("johto_hive"); },
                 new ItemStack(GymBadges.HIVE_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Johto_Hive")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("johto_hive")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -89,9 +88,9 @@ public class JohtoLeagueGUI extends AbstractContainerScreen<JohtoLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Johto_Plain"); },
+                onPress -> { gymSelect("johto_plain"); },
                 new ItemStack(GymBadges.PLAIN_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Johto_Plain")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("johto_plain")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -100,9 +99,9 @@ public class JohtoLeagueGUI extends AbstractContainerScreen<JohtoLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Johto_Fog"); },
+                onPress -> { gymSelect("johto_fog"); },
                 new ItemStack(GymBadges.FOG_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Johto_Fog")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("johto_fog")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -111,9 +110,9 @@ public class JohtoLeagueGUI extends AbstractContainerScreen<JohtoLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Johto_Storm"); },
+                onPress -> { gymSelect("johto_storm"); },
                 new ItemStack(GymBadges.STORM_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Johto_Storm")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("johto_storm")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -122,9 +121,9 @@ public class JohtoLeagueGUI extends AbstractContainerScreen<JohtoLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Johto_Mineral"); },
+                onPress -> { gymSelect("johto_mineral"); },
                 new ItemStack(GymBadges.MINERAL_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Johto_Mineral")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("johto_mineral")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -133,9 +132,9 @@ public class JohtoLeagueGUI extends AbstractContainerScreen<JohtoLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Johto_Glacier"); },
+                onPress -> { gymSelect("johto_glacier"); },
                 new ItemStack(GymBadges.GLACIER_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Johto_Glacier")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("johto_glacier")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -144,9 +143,9 @@ public class JohtoLeagueGUI extends AbstractContainerScreen<JohtoLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Johto_Rising"); },
+                onPress -> { gymSelect("johto_rising"); },
                 new ItemStack(GymBadges.RISING_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Johto_Rising")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("johto_rising")-1] == 0
         ));
     }
 
@@ -168,7 +167,7 @@ public class JohtoLeagueGUI extends AbstractContainerScreen<JohtoLeagueMenu> {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        renderBackground(guiGraphics, mouseX, mouseY, delta);
+//        renderBackground(guiGraphics, mouseX, mouseY, delta);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
 

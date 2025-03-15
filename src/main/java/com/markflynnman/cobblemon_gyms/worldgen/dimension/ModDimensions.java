@@ -63,7 +63,6 @@ public class ModDimensions {
             List.of(new FlatLayerInfo(
                     1, // height
                     BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("minecraft", "air"))
-//                  ForgeRegistries.BLOCKS.getValue(ResourceLocation.fromNamespaceAndPath("minecraft", "air")) // block
             )),
             Optional.empty(),
             biomeRegistry.getOrThrow(ModBiomes.GYM_BIOME)

@@ -63,6 +63,7 @@ public class CustomButton extends Button {
         int texWidth = Math.max(this.texWidth, (this.borderSize * 2) + 1);
         int texHeight = Math.max(this.texHeight, (this.borderSize * 2) + 1);
         int highlightY = (this.isHoveredOrFocused()) ? this.yDiffTex : 0;
+        CobblemonGymsGUITools guiTools = new CobblemonGymsGUITools(pGuiGraphics);
 
         // Top Left Corner
         pGuiGraphics.blit(this.texture, this.getX(), this.getY(), this.xTexStart, this.yTexStart + highlightY, this.borderSize, this.borderSize);
@@ -73,27 +74,19 @@ public class CustomButton extends Button {
         // Bottom Right Corner
         pGuiGraphics.blit(this.texture, this.getX() + width - this.borderSize, this.getY() + height - this.borderSize, this.xTexStart + texWidth - this.borderSize, this.yTexStart + highlightY + texHeight - this.borderSize, this.borderSize, this.borderSize);
 
-        // FIX
         // Top Border Fill
-//        pGuiGraphics.blitRepeating(this.texture, this.getX() + this.borderSize, this.getY(), width - (this.borderSize * 2), this.borderSize, this.xTexStart + this.borderSize, this.yTexStart + highlightY, this.borderSize, this.borderSize);
+        guiTools.blitRepeating(pGuiGraphics, this.texture, this.getX() + this.borderSize, this.getY(), width - (this.borderSize * 2), this.borderSize, this.xTexStart + this.borderSize, this.yTexStart + highlightY, this.borderSize, this.borderSize);
         // Left Border Fill
-//        pGuiGraphics.blitRepeating(this.texture, this.getX(), this.getY() + this.borderSize, this.borderSize, height - (this.borderSize * 2), this.xTexStart, this.yTexStart + highlightY + this.borderSize, this.borderSize, this.borderSize);
+        guiTools.blitRepeating(pGuiGraphics, this.texture, this.getX(), this.getY() + this.borderSize, this.borderSize, height - (this.borderSize * 2), this.xTexStart, this.yTexStart + highlightY + this.borderSize, this.borderSize, this.borderSize);
         // Right Border Fill
-//        pGuiGraphics.blitRepeating(this.texture, this.getX() + width - this.borderSize, this.getY() + this.borderSize, this.borderSize, height - (this.borderSize * 2), texWidth - this.borderSize, this.yTexStart + highlightY + this.borderSize, this.borderSize, this.borderSize);
+        guiTools.blitRepeating(pGuiGraphics, this.texture, this.getX() + width - this.borderSize, this.getY() + this.borderSize, this.borderSize, height - (this.borderSize * 2), texWidth - this.borderSize, this.yTexStart + highlightY + this.borderSize, this.borderSize, this.borderSize);
         // Bottom Border Fill
-//        pGuiGraphics.blitRepeating(this.texture, this.getX() + this.borderSize, this.getY() + height - this.borderSize, width - (this.borderSize * 2), this.borderSize, this.xTexStart + this.borderSize, this.yTexStart + highlightY + texHeight - this.borderSize, this.borderSize, this.borderSize);
+        guiTools.blitRepeating(pGuiGraphics, this.texture, this.getX() + this.borderSize, this.getY() + height - this.borderSize, width - (this.borderSize * 2), this.borderSize, this.xTexStart + this.borderSize, this.yTexStart + highlightY + texHeight - this.borderSize, this.borderSize, this.borderSize);
         // Internal Fill
-//        pGuiGraphics.blitRepeating(this.texture, this.getX() + this.borderSize, this.getY() + this.borderSize, width - (this.borderSize * 2), height - (this.borderSize * 2), this.xTexStart + this.borderSize, this.yTexStart + highlightY + this.borderSize, this.borderSize, this.borderSize);
+        guiTools.blitRepeating(pGuiGraphics, this.texture, this.getX() + this.borderSize, this.getY() + this.borderSize, width - (this.borderSize * 2), height - (this.borderSize * 2), this.xTexStart + this.borderSize, this.yTexStart + highlightY + this.borderSize, this.borderSize, this.borderSize);
+
+        if (this.text != CommonComponents.EMPTY) {
+            pGuiGraphics.drawString(this.font, this.text, this.textX + this.textPadding, this.textY + this.textPadding, ChatFormatting.WHITE.getColor(), true);
+        }
     }
-
-
-//    @Override
-//    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-//        super.render(guiGraphics, mouseX, mouseY, delta);
-////        int maxText =
-//
-//        if (this.text != CommonComponents.EMPTY) {
-//            guiGraphics.drawString(this.font, this.text, this.textX + this.textPadding, this.textY + this.textPadding, ChatFormatting.WHITE.getColor(), true);
-//        }
-//    }
 }

@@ -5,9 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class GymBadgeItem extends Item {
@@ -22,10 +20,4 @@ public class GymBadgeItem extends Item {
         tooltipComponents.add(Component.translatable("tooltip.cobblemon_gyms."+league).withStyle(ChatFormatting.GRAY));
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
-
-    //    @Override
-//    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-//        pTooltipComponents.add(Component.translatable("tooltip.cobblemon_gyms."+league).withStyle(ChatFormatting.GRAY));
-//        super.appendHoverText(pStack, (TooltipContext) pLevel, pTooltipComponents, pIsAdvanced);
-//    }
 }

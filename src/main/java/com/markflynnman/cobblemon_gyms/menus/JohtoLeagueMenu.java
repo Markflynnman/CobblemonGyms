@@ -21,15 +21,6 @@ public class JohtoLeagueMenu extends AbstractContainerMenu {
         checkContainerSize(inv, 2);
         this.level = inv.player.level();
         this.data = data;
-
-//        addPlayerInventory(inv);
-//        addPlayerHotbar(inv);
-
-//        this.addSlot(new SlotItemHandler(dataInventory, 0, 80, 11));
-//        this.addSlot(new SlotItemHandler(dataInventory, 1, 80, 59));
-
-//        addDataSlots(data);
-
     }
 
     @Override

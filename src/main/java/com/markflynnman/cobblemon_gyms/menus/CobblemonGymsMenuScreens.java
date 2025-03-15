@@ -4,7 +4,6 @@ import com.markflynnman.cobblemon_gyms.CobblemonGyms;
 import com.markflynnman.cobblemon_gyms.screens.*;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

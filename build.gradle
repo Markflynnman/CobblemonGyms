@@ -169,6 +169,10 @@ dependencies {
     implementation("thedarkcolour:kotlinforforge-neoforge:${kotlin_version}")
     compileOnly("com.cobblemon:neoforge:${cobblemon_version}")
     runtimeOnly("maven.modrinth:cobblemon:1.6.1-neoforge")
+
+    implementation("maven.modrinth:architectury-api:${architectury_api_version}")
+    implementation("maven.modrinth:rctapi:${rctapi_version}")
+    implementation("maven.modrinth:tbcs:${tbcs_version}")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

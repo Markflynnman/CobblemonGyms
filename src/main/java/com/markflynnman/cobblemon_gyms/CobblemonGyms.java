@@ -68,9 +68,6 @@ public class CobblemonGyms
 
         event.getPlayer().getData(Attachments.PLAYER_STARTER_POKEMON.get()).setStarterPokemon(event.getPokemon());
 
-//        event.getPlayer().getCapability(PLAYER_STARTER_POKEMON).ifPresent(starterPokemon -> {
-//            starterPokemon.setStarterPokemon(event.getPokemon());
-//        });
         return Unit.INSTANCE;
     }
 
@@ -102,9 +99,6 @@ public class CobblemonGyms
                                 new CBadgeCollectionDataSyncPacket(player.getData(Attachments.PLAYER_BADGE_COLLECTION.get()).getBadgeCollection())
                         );
                     }
-//                    player.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
-//                        PacketHandler.sendToPlayer(new CBadgeCollectionDataSyncPacket(badgeCollection.getBadgeCollection()), player);
-//                    });
                 }
                 if (event.getEntity() instanceof ServerPlayer player) {
                     if (player.hasData(Attachments.PLAYER_STARTER_POKEMON)) {
@@ -114,9 +108,6 @@ public class CobblemonGyms
                                 new CStarterPokemonDataSyncPacket(starterPokemon.getStarterPokemon(), starterPokemon.getStarterPokemonType(), starterPokemon.getStarterPokemonDex())
                         );
                     }
-//                    player.getCapability(PLAYER_STARTER_POKEMON).ifPresent(starterPokemon -> {
-//                        PacketHandler.sendToPlayer(new CStarterPokemonDataSyncPacket(starterPokemon.getStarterPokemon(), starterPokemon.getStarterPokemonType(), starterPokemon.getStarterPokemonDex()), player);
-//                    });
                 }
             }
         }

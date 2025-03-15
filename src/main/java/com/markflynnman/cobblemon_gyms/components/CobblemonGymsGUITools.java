@@ -46,23 +46,17 @@ public class CobblemonGymsGUITools {
         guiGraphics.blit(pTexture, pX, pY + height - pBorderSize, pXTexStart, pYTexStart + texHeight - pBorderSize, pBorderSize, pBorderSize);
         // Bottom Right Corner
         guiGraphics.blit(pTexture, pX + width - pBorderSize, pY + height - pBorderSize, pXTexStart + texWidth - pBorderSize, pYTexStart + texHeight - pBorderSize, pBorderSize, pBorderSize);
-        // FIX
 
         // Top Border Fill
         blitRepeating(guiGraphics, pTexture, pX + pBorderSize, pY, pWidth - (pBorderSize * 2), pBorderSize, pXTexStart + pBorderSize, pYTexStart, pBorderSize, pBorderSize);
-//        guiGraphics.blitRepeating(pTexture, pX + pBorderSize, pY, pWidth - (pBorderSize * 2), pBorderSize, pXTexStart + pBorderSize, pYTexStart, pBorderSize, pBorderSize);
         // Left Border Fill
         blitRepeating(guiGraphics, pTexture, pX, pY + pBorderSize, pBorderSize, pHeight - (pBorderSize * 2), pXTexStart, pYTexStart + pBorderSize, pBorderSize, pBorderSize);
-//        guiGraphics.blitRepeating(pTexture, pX, pY + pBorderSize, pBorderSize, pHeight - (pBorderSize * 2), pXTexStart, pYTexStart + pBorderSize, pBorderSize, pBorderSize);
         // Right Border Fill
         blitRepeating(guiGraphics, pTexture, pX + width - pBorderSize, pY + pBorderSize, pBorderSize, pHeight - (pBorderSize * 2), pTexWidth - pBorderSize, pYTexStart + pBorderSize, pBorderSize, pBorderSize);
-//        guiGraphics.blitRepeating(pTexture, pX + width - pBorderSize, pY + pBorderSize, pBorderSize, pHeight - (pBorderSize * 2), pTexWidth - pBorderSize, pYTexStart + pBorderSize, pBorderSize, pBorderSize);
         // Bottom Border Fill
         blitRepeating(guiGraphics, pTexture, pX + pBorderSize, pY + height - pBorderSize, pWidth - (pBorderSize * 2), pBorderSize, pXTexStart + pBorderSize, pYTexStart + pTexHeight - pBorderSize, pBorderSize, pBorderSize);
-//        guiGraphics.blitRepeating(pTexture, pX + pBorderSize, pY + height - pBorderSize, pWidth - (pBorderSize * 2), pBorderSize, pXTexStart + pBorderSize, pYTexStart + pTexHeight - pBorderSize, pBorderSize, pBorderSize);
         // Internal Fill
         blitRepeating(guiGraphics, pTexture, pX + pBorderSize, pY + pBorderSize, pWidth - (pBorderSize * 2), pHeight - (pBorderSize * 2), pXTexStart + pBorderSize, pYTexStart + pBorderSize, pBorderSize, pBorderSize);
-//        guiGraphics.blitRepeating(pTexture, pX + pBorderSize, pY + pBorderSize, pWidth - (pBorderSize * 2), pHeight - (pBorderSize * 2), pXTexStart + pBorderSize, pYTexStart + pBorderSize, pBorderSize, pBorderSize);
     }
 
     public void blitRepeating(

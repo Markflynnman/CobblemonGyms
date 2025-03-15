@@ -56,9 +56,6 @@ public class BadgeCollectionCommands {
         if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)) {
             PacketDistributor.sendToPlayer(pPlayer, new CBadgeCollectionDataSyncPacket(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).getBadgeCollection()));
         }
-//        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
-//            PacketHandler.sendToPlayer(new CBadgeCollectionDataSyncPacket(badgeCollection.getBadgeCollection()), pPlayer);
-//        });
 
         if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)) {
             String output;
@@ -77,21 +74,6 @@ public class BadgeCollectionCommands {
                 return Component.literal(((source.getPlayer() == pPlayer) ? "Your" : player_name) +" badges:\n"+ output);
             }, false);
         }
-//        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
-//            String output;
-//            int[] badges = IntStream.range(0, badgeCollection.getBadgeCollection().length)
-//                    .filter(i -> badgeCollection.getBadgeCollection()[i] == 1)
-//                    .toArray();
-//
-//            output = BadgeString(badges, (source.getPlayer() == pPlayer) ? "" : player_name);
-//
-//            source.sendSuccess(() -> {
-//                if (dev) {
-//                    return Component.literal(((source.getPlayer() == pPlayer) ? "Your" : player_name) +" badges:\n"+ output + "\n" + Arrays.toString(badgeCollection.getBadgeCollection()));
-//                }
-//                return Component.literal(((source.getPlayer() == pPlayer) ? "Your" : player_name) +" badges:\n"+ output);
-//            }, false);
-//        });
 
         return 1;
     }
@@ -101,9 +83,6 @@ public class BadgeCollectionCommands {
         if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)){
             response.set(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).addBadge(badge.toLowerCase()));
         }
-//        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
-//            response.set(badgeCollection.addBadge(badge));
-//        });
 
         if (response.get()) {
             source.sendSuccess(() -> {
@@ -122,9 +101,6 @@ public class BadgeCollectionCommands {
         if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)) {
             response.set(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).removeBadge(badge.toLowerCase()));
         }
-//        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
-//            response.set(badgeCollection.removeBadge(badge));
-//        });
 
         if (response.get()) {
             source.sendSuccess(() -> {

@@ -77,9 +77,6 @@ public class CobblemonGymsCommands {
         if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)) {
             PacketDistributor.sendToPlayer(pPlayer, new CBadgeCollectionDataSyncPacket(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).getBadgeCollection()));
         }
-//        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
-//            PacketHandler.sendToPlayer(new CBadgeCollectionDataSyncPacket(badgeCollection.getBadgeCollection()), pPlayer);
-//        });
 
         pPlayer.openMenu(new SimpleMenuProvider(
                 (contentId, playerInventory, player) -> new CobblemonGymsMenu(contentId, playerInventory),
@@ -124,11 +121,6 @@ public class CobblemonGymsCommands {
                 return Component.literal(((source.getPlayer() == pPlayer) ? "Your" : player_name + "'s") + " starter: " + starterPokemon.getStarterPokemon() + ", Type: " + starterPokemon.getStarterPokemonType() + ", Dex number: " + starterPokemon.getStarterPokemonDex());
             }, false);
         }
-//        pPlayer.getCapability(PlayerStarterPokemonProvider.PLAYER_STARTER_POKEMON).ifPresent(starterPokemon -> {
-//            source.sendSuccess(() -> {
-//                return Component.literal(((source.getPlayer() == pPlayer) ? "Your" : player_name + "'s") + " starter: " + starterPokemon.getStarterPokemon() + ", Type: " + starterPokemon.getStarterPokemonType() + ", Dex number: " + starterPokemon.getStarterPokemonDex());
-//            }, false);
-//        });
 
         return 1;
     }
@@ -148,12 +140,6 @@ public class CobblemonGymsCommands {
                 return Component.literal("Set " + player_name + "'s starter pokemon to: " + starterPokemon.getStarterPokemon() + ", Type: " + starterPokemon.getStarterPokemonType() + ", Dex number: " + starterPokemon.getStarterPokemonDex());
             }, true);
         }
-//        pPlayer.getCapability(PlayerStarterPokemonProvider.PLAYER_STARTER_POKEMON).ifPresent(starterPokemon -> {
-//            starterPokemon.setStarterPokemon(pPokemon.create());
-//            source.sendSuccess(() -> {
-//                return Component.literal("Set " + player_name + "'s starter pokemon to: " + starterPokemon.getStarterPokemon() + ", Type: " + starterPokemon.getStarterPokemonType() + ", Dex number: " + starterPokemon.getStarterPokemonDex());
-//            }, true);
-//        });
 
         return 1;
     }

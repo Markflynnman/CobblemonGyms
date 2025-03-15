@@ -1,13 +1,9 @@
 package com.markflynnman.cobblemon_gyms.network;
 
-import com.cobblemon.mod.relocations.oracle.truffle.regex.tregex.buffer.IntArrayBuffer;
 import com.markflynnman.cobblemon_gyms.CobblemonGyms;
 import com.markflynnman.cobblemon_gyms.data_attachments.ClientBadgeCollectionData;
-import com.markflynnman.cobblemon_gyms.data_attachments.PlayerBadgeCollection;
 import com.mojang.logging.LogUtils;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
@@ -47,27 +43,3 @@ public record CBadgeCollectionDataSyncPacket(int[] badgeCollection) implements C
         });
     }
 }
-
-//public class CBadgeCollectionDataSyncPacket {
-//    private final int[] badgeCollection;
-//
-//    public CBadgeCollectionDataSyncPacket(int[] badgeCollection) {
-//        this.badgeCollection = badgeCollection;
-//    }
-//
-//    public CBadgeCollectionDataSyncPacket(FriendlyByteBuf buffer) {
-//        this(buffer.readVarIntArray());
-//    }
-//
-//    public void encode(FriendlyByteBuf buffer) {
-//        buffer.writeVarIntArray(this.badgeCollection);
-//    }
-//
-//    public void handle(Supplier<NetworkEvent.Context> supplier) {
-//        NetworkEvent.Context context = supplier.get();
-//        context.enqueueWork(() -> {
-//            // ON CLIENT
-//            ClientBadgeCollectionData.set(this.badgeCollection);
-//        });
-//    }
-//}

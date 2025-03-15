@@ -35,28 +35,3 @@ public record SGymSelectionPacket(String gymID) implements CustomPacketPayload {
         });
     }
 }
-
-//public class SGymSelectionPacket {
-//    private final String gym_ID;
-//
-//    public SGymSelectionPacket(String gym_ID) { this.gym_ID = gym_ID; }
-//
-//    public SGymSelectionPacket(FriendlyByteBuf buffer) {
-//        this(buffer.readUtf());
-//    }
-//
-//    public void encode(FriendlyByteBuf buffer) {
-//        buffer.writeUtf(this.gym_ID);
-//    }
-//
-//    public void handle(Supplier<NetworkEvent.Context> context) {
-//        ServerPlayer serverPlayer = context.get().getSender();
-//        if (serverPlayer == null) {
-//            return;
-//        }
-//
-//        new GymSelectionCommand(this.gym_ID, serverPlayer);
-//
-//        context.get().setPacketHandled(true);
-//    }
-//}

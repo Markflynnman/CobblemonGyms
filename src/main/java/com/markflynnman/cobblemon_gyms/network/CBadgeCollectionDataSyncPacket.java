@@ -25,12 +25,6 @@ public record CBadgeCollectionDataSyncPacket(int[] badgeCollection) implements C
             (buf, _CBadgeCollectionDataSyncPacket) -> _CBadgeCollectionDataSyncPacket.encode(buf),
             CBadgeCollectionDataSyncPacket::decode);
 
-//    public static final StreamCodec<ByteBuf, CBadgeCollectionDataSyncPacket> STREAM_CODEC = StreamCodec.composite(
-//            ByteBufCodecs.BYTE_ARRAY,
-//            CBadgeCollectionDataSyncPacket::badgeCollection,
-//            CBadgeCollectionDataSyncPacket::new
-//    );
-
     @Override
     public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
         return TYPE;

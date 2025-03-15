@@ -2,7 +2,6 @@ package com.markflynnman.cobblemon_gyms.network;
 
 import com.markflynnman.cobblemon_gyms.CobblemonGyms;
 import com.markflynnman.cobblemon_gyms.data_attachments.Attachments;
-import com.markflynnman.cobblemon_gyms.data_attachments.PlayerBadgeCollection;
 import com.markflynnman.cobblemon_gyms.menus.*;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.chat.Component;

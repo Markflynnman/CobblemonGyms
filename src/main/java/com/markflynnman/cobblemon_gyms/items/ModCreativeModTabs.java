@@ -5,15 +5,18 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
+
+
 
 public class ModCreativeModTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CobblemonGyms.MODID);
 
-    public static final RegistryObject<CreativeModeTab> COBBLEMON_GYMS_TABS = CREATIVE_MODE_TABS.register("cobblemon_gyms_tab",
+    public static final Supplier<CreativeModeTab> COBBLEMON_GYMS_TABS = CREATIVE_MODE_TABS.register("cobblemon_gyms_tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(GymBadges.BOULDER_BADGE.get()))
                     .title(Component.translatable("creativetab.cobblemon_gyms_tab"))
                     .displayItems((pParameters, pOutput) -> {

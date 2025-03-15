@@ -1,4 +1,4 @@
-package com.markflynnman.cobblemon_gyms.capabilities;
+package com.markflynnman.cobblemon_gyms.data_attachments;
 
 public class ClientStarterPokemonData {
     private static String starterPokemon;

@@ -1,10 +1,9 @@
 package com.markflynnman.cobblemon_gyms.commands;
 
 import com.markflynnman.cobblemon_gyms.Config;
-import com.markflynnman.cobblemon_gyms.capabilities.PlayerBadgeCollection;
-import com.markflynnman.cobblemon_gyms.capabilities.PlayerBadgeCollectionProvider;
+import com.markflynnman.cobblemon_gyms.data_attachments.Attachments;
+import com.markflynnman.cobblemon_gyms.data_attachments.PlayerBadgeCollection;
 import com.markflynnman.cobblemon_gyms.network.CBadgeCollectionDataSyncPacket;
-import com.markflynnman.cobblemon_gyms.network.PacketHandler;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -13,6 +12,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -53,12 +53,14 @@ public class BadgeCollectionCommands {
     private int PlayerBadges(CommandSourceStack source, ServerPlayer pPlayer, boolean dev) throws CommandSyntaxException {
         String player_name = pPlayer.getName().toString().replace("literal{", "").replace("}", "");
 
-        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
-            PacketHandler.sendToPlayer(new CBadgeCollectionDataSyncPacket(badgeCollection.getBadgeCollection()), pPlayer);
-        });
+        if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)) {
+            PacketDistributor.sendToPlayer(pPlayer, new CBadgeCollectionDataSyncPacket(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).getBadgeCollection()));
+        }
 
-        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
+        if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)) {
             String output;
+            PlayerBadgeCollection badgeCollection = pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION);
+
             int[] badges = IntStream.range(0, badgeCollection.getBadgeCollection().length)
                     .filter(i -> badgeCollection.getBadgeCollection()[i] == 1)
                     .toArray();
@@ -71,16 +73,17 @@ public class BadgeCollectionCommands {
                 }
                 return Component.literal(((source.getPlayer() == pPlayer) ? "Your" : player_name) +" badges:\n"+ output);
             }, false);
-        });
+        }
 
         return 1;
     }
 
     private int PlayerBadgesAdd(CommandSourceStack source, ServerPlayer pPlayer, String badge) throws CommandSyntaxException {
         AtomicBoolean response = new AtomicBoolean(false);
-        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
-            response.set(badgeCollection.addBadge(badge));
-        });
+        if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)){
+            response.set(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).addBadge(badge.toLowerCase()));
+        }
+
         if (response.get()) {
             source.sendSuccess(() -> {
                 return Component.literal("ADD: "+badge);
@@ -95,9 +98,10 @@ public class BadgeCollectionCommands {
 
     private int PlayerBadgesRemove(CommandSourceStack source, ServerPlayer pPlayer, String badge) throws CommandSyntaxException {
         AtomicBoolean response = new AtomicBoolean(false);
-        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
-            response.set(badgeCollection.removeBadge(badge));
-        });
+        if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)) {
+            response.set(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).removeBadge(badge.toLowerCase()));
+        }
+
         if (response.get()) {
             source.sendSuccess(() -> {
                 return Component.literal("REMOVE: "+badge);

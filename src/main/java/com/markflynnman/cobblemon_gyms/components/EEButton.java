@@ -40,13 +40,9 @@ public class EEButton extends Button {
     public void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
         int xTexStart = (this.isHoveredOrFocused()) ? this.highlightXTexStart : this.xTexStart;
         int yTexStart = (this.isHoveredOrFocused()) ? this.highlightYTexStart : this.yTexStart;
+        CobblemonGymsGUITools guiTools = new CobblemonGymsGUITools(pGuiGraphics);
 
-        pGuiGraphics.blitRepeating(this.texture, this.getX(), this.getY(), this.width, this.height, xTexStart, yTexStart, 1, 1);
-    }
-
-    @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        super.render(guiGraphics, mouseX, mouseY, delta);
+        guiTools.blitRepeating(pGuiGraphics, this.texture, this.getX(), this.getY(), this.width, this.height, xTexStart, yTexStart, 1, 1);
     }
 
     @Override

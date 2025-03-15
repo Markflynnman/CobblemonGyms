@@ -14,6 +14,9 @@ public class GymSelectionCommand {
         CommandDispatcher<CommandSourceStack> commandDispatcher = pPlayer.getServer().getCommands().getDispatcher();
         ParseResults<CommandSourceStack> parseResults = commandDispatcher.parse(command, source);
 
-        int result = pPlayer.server.getCommands().performCommand(parseResults, command);
+        pPlayer.server.getCommands().performCommand(parseResults, command);
+
+        int result = 1; // FIX LATER
+        // int result = pPlayer.server.getCommands().performCommand(parseResults, command);
     }
 }

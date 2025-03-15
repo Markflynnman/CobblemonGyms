@@ -1,13 +1,12 @@
 package com.markflynnman.cobblemon_gyms.screens;
 
 import com.markflynnman.cobblemon_gyms.CobblemonGyms;
-import com.markflynnman.cobblemon_gyms.capabilities.ClientBadgeCollectionData;
-import com.markflynnman.cobblemon_gyms.capabilities.PlayerBadgeCollection;
+import com.markflynnman.cobblemon_gyms.data_attachments.ClientBadgeCollectionData;
+import com.markflynnman.cobblemon_gyms.data_attachments.PlayerBadgeCollection;
 import com.markflynnman.cobblemon_gyms.components.CobblemonGymsGUITools;
 import com.markflynnman.cobblemon_gyms.components.ItemButton;
 import com.markflynnman.cobblemon_gyms.items.GymBadges;
 import com.markflynnman.cobblemon_gyms.menus.PaldeaLeagueMenu;
-import com.markflynnman.cobblemon_gyms.network.PacketHandler;
 import com.markflynnman.cobblemon_gyms.network.SGymSelectionPacket;
 import com.markflynnman.cobblemon_gyms.network.SOpenScreenPacket;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -20,9 +19,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(CobblemonGyms.MODID, "textures/gui/cobblemongymsgui.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(CobblemonGyms.MODID, "textures/gui/cobblemongymsgui.png");
     protected final Minecraft minecraftInstance;
     private static final int bgWidth = 208;
     private static final int bgHeight = 172;
@@ -46,12 +46,12 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
     }
 
     public void gymSelect(String pCommand) {
-        PacketHandler.sendToServer(new SGymSelectionPacket(pCommand));
+        PacketDistributor.sendToServer(new SGymSelectionPacket(pCommand));
         closeScreen();
     }
 
     public void openScreen(String screen) {
-        PacketHandler.sendToServer(new SOpenScreenPacket(screen));
+        PacketDistributor.sendToServer(new SOpenScreenPacket(screen));
     }
 
     @Override
@@ -69,7 +69,7 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Bug"); },
+                onPress -> { gymSelect("paldea_bug"); },
                 new ItemStack(GymBadges.SV_BUG_BADGE.get()),
                 false
         ));
@@ -80,9 +80,9 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Grass"); },
+                onPress -> { gymSelect("paldea_grass"); },
                 new ItemStack(GymBadges.SV_GRASS_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Paldea_Grass")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("paldea_grass")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -91,9 +91,9 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Electric"); },
+                onPress -> { gymSelect("paldea_electric"); },
                 new ItemStack(GymBadges.SV_ELECTRIC_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Paldea_Electric")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("paldea_electric")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -102,9 +102,9 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Water"); },
+                onPress -> { gymSelect("paldea_water"); },
                 new ItemStack(GymBadges.SV_WATER_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Paldea_Water")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("paldea_water")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -113,9 +113,9 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Normal"); },
+                onPress -> { gymSelect("paldea_normal"); },
                 new ItemStack(GymBadges.SV_NORMAL_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Paldea_Normal")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("paldea_normal")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -124,9 +124,9 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Ghost"); },
+                onPress -> { gymSelect("paldea_ghost"); },
                 new ItemStack(GymBadges.SV_GHOST_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Paldea_Ghost")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("paldea_ghost")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -135,9 +135,9 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Psychic"); },
+                onPress -> { gymSelect("paldea_psychic"); },
                 new ItemStack(GymBadges.SV_PSYCHIC_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Paldea_Psychic")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("paldea_psychic")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -146,9 +146,9 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Ice"); },
+                onPress -> { gymSelect("paldea_ice"); },
                 new ItemStack(GymBadges.SV_ICE_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Paldea_Ice")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("paldea_ice")-1] == 0
         ));
 
         // Mid 5
@@ -159,7 +159,7 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Dark"); },
+                onPress -> { gymSelect("paldea_dark"); },
                 new ItemStack(GymBadges.SV_DARK_BADGE.get()),
                 false
         ));
@@ -170,9 +170,9 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Fire"); },
+                onPress -> { gymSelect("paldea_fire"); },
                 new ItemStack(GymBadges.SV_FIRE_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Paldea_Fire")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("paldea_fire")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -181,9 +181,9 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Poison"); },
+                onPress -> { gymSelect("paldea_poison"); },
                 new ItemStack(GymBadges.SV_POISON_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Paldea_Poison")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("paldea_poison")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -192,9 +192,9 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Fairy"); },
+                onPress -> { gymSelect("paldea_fairy"); },
                 new ItemStack(GymBadges.SV_FAIRY_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Paldea_Fairy")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("paldea_fairy")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -203,9 +203,9 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Fighting"); },
+                onPress -> { gymSelect("paldea_fighting"); },
                 new ItemStack(GymBadges.SV_FIGHTING_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Paldea_Fighting")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("paldea_fighting")-1] == 0
         ));
 
         // Bottom 5
@@ -216,7 +216,7 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Rock"); },
+                onPress -> { gymSelect("paldea_rock"); },
                 new ItemStack(GymBadges.SV_ROCK_BADGE.get()),
                 false
         ));
@@ -227,9 +227,9 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Flying"); },
+                onPress -> { gymSelect("paldea_flying"); },
                 new ItemStack(GymBadges.SV_FLYING_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Paldea_Flying")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("paldea_flying")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -238,9 +238,9 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Steel"); },
+                onPress -> { gymSelect("paldea_steel"); },
                 new ItemStack(GymBadges.SV_STEEL_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Paldea_Steel")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("paldea_steel")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -249,9 +249,9 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Ground"); },
+                onPress -> { gymSelect("paldea_ground"); },
                 new ItemStack(GymBadges.SV_GROUND_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Paldea_Ground")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("paldea_ground")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -260,9 +260,9 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Paldea_Dragon"); },
+                onPress -> { gymSelect("paldea_dragon"); },
                 new ItemStack(GymBadges.SV_DRAGON_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Paldea_Dragon")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("paldea_dragon")-1] == 0
         ));
 
         // Back
@@ -287,7 +287,7 @@ public class PaldeaLeagueGUI extends AbstractContainerScreen<PaldeaLeagueMenu> {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        renderBackground(guiGraphics);
+//        renderBackground(guiGraphics, mouseX, mouseY, delta);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
 

@@ -1,13 +1,12 @@
 package com.markflynnman.cobblemon_gyms.screens;
 
 import com.markflynnman.cobblemon_gyms.CobblemonGyms;
-import com.markflynnman.cobblemon_gyms.capabilities.ClientBadgeCollectionData;
-import com.markflynnman.cobblemon_gyms.capabilities.PlayerBadgeCollection;
+import com.markflynnman.cobblemon_gyms.data_attachments.ClientBadgeCollectionData;
+import com.markflynnman.cobblemon_gyms.data_attachments.PlayerBadgeCollection;
 import com.markflynnman.cobblemon_gyms.components.CobblemonGymsGUITools;
 import com.markflynnman.cobblemon_gyms.components.ItemButton;
 import com.markflynnman.cobblemon_gyms.items.GymBadges;
 import com.markflynnman.cobblemon_gyms.menus.KalosLeagueMenu;
-import com.markflynnman.cobblemon_gyms.network.PacketHandler;
 import com.markflynnman.cobblemon_gyms.network.SGymSelectionPacket;
 import com.markflynnman.cobblemon_gyms.network.SOpenScreenPacket;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -20,9 +19,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class KalosLeagueGUI extends AbstractContainerScreen<KalosLeagueMenu> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(CobblemonGyms.MODID, "textures/gui/cobblemongymsgui.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(CobblemonGyms.MODID, "textures/gui/cobblemongymsgui.png");
     protected final Minecraft minecraftInstance;
     private static final int bgWidth = 180;
     private static final int bgHeight = 108;
@@ -45,12 +45,12 @@ public class KalosLeagueGUI extends AbstractContainerScreen<KalosLeagueMenu> {
     }
 
     public void gymSelect(String pCommand) {
-        PacketHandler.sendToServer(new SGymSelectionPacket(pCommand));
+        PacketDistributor.sendToServer(new SGymSelectionPacket(pCommand));
         closeScreen();
     }
 
     public void openScreen(String screen) {
-        PacketHandler.sendToServer(new SOpenScreenPacket(screen));
+        PacketDistributor.sendToServer(new SOpenScreenPacket(screen));
     }
 
     @Override
@@ -66,7 +66,7 @@ public class KalosLeagueGUI extends AbstractContainerScreen<KalosLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Kalos_Bug"); },
+                onPress -> { gymSelect("kalos_bug"); },
                 new ItemStack(GymBadges.BUG_BADGE.get()),
                 false
         ));
@@ -77,9 +77,9 @@ public class KalosLeagueGUI extends AbstractContainerScreen<KalosLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Kalos_Cliff"); },
+                onPress -> { gymSelect("kalos_cliff"); },
                 new ItemStack(GymBadges.CLIFF_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Kalos_Cliff")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("kalos_cliff")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -88,9 +88,9 @@ public class KalosLeagueGUI extends AbstractContainerScreen<KalosLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Kalos_Rumble"); },
+                onPress -> { gymSelect("kalos_rumble"); },
                 new ItemStack(GymBadges.RUMBLE_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Kalos_Rumble")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("kalos_rumble")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -99,9 +99,9 @@ public class KalosLeagueGUI extends AbstractContainerScreen<KalosLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Kalos_Plant"); },
+                onPress -> { gymSelect("kalos_plant"); },
                 new ItemStack(GymBadges.PLANT_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Kalos_Plant")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("kalos_plant")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -110,9 +110,9 @@ public class KalosLeagueGUI extends AbstractContainerScreen<KalosLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Kalos_Voltage"); },
+                onPress -> { gymSelect("kalos_voltage"); },
                 new ItemStack(GymBadges.VOLTAGE_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Kalos_Voltage")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("kalos_voltage")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -121,9 +121,9 @@ public class KalosLeagueGUI extends AbstractContainerScreen<KalosLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Kalos_Fairy"); },
+                onPress -> { gymSelect("kalos_fairy"); },
                 new ItemStack(GymBadges.FAIRY_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Kalos_Fairy")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("kalos_fairy")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -132,9 +132,9 @@ public class KalosLeagueGUI extends AbstractContainerScreen<KalosLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Kalos_Psychic"); },
+                onPress -> { gymSelect("kalos_psychic"); },
                 new ItemStack(GymBadges.PSYCHIC_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Kalos_Psychic")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("kalos_psychic")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -143,9 +143,9 @@ public class KalosLeagueGUI extends AbstractContainerScreen<KalosLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Kalos_Iceberg"); },
+                onPress -> { gymSelect("kalos_iceberg"); },
                 new ItemStack(GymBadges.ICEBERG_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Kalos_Iceberg")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("kalos_iceberg")-1] == 0
         ));
     }
 
@@ -167,7 +167,7 @@ public class KalosLeagueGUI extends AbstractContainerScreen<KalosLeagueMenu> {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        renderBackground(guiGraphics);
+//        renderBackground(guiGraphics, mouseX, mouseY, delta);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
 

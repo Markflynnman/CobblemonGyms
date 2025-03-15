@@ -1,121 +1,121 @@
 package com.markflynnman.cobblemon_gyms;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.*;
 
 
 public class Config {
-    public static final ForgeConfigSpec CONFIG_SPEC;
+    public static final ModConfigSpec CONFIG_SPEC;
     public static final String DEFAULT_GYM_COMMAND = "say Setup gym command in the config or by typing \"/CobblemonGyms command set {badge} {command}\".";
-    public static final Map<String, ForgeConfigSpec.ConfigValue<String>> GymConfigCommands = new HashMap<>();
+    public static final Map<String, ModConfigSpec.ConfigValue<String>> GymConfigCommands = new HashMap<>();
 
-    private static ForgeConfigSpec.IntValue gymGUICommand;
-    private static ForgeConfigSpec.IntValue gymGUICommandOther;
-    private static ForgeConfigSpec.IntValue badgesCommand;
-    private static ForgeConfigSpec.IntValue badgesCommandOther;
-    private static ForgeConfigSpec.IntValue badgesAddCommand;
-    private static ForgeConfigSpec.IntValue badgesRemoveCommand;
-    private static ForgeConfigSpec.IntValue badgesDevCommand;
-    private static ForgeConfigSpec.IntValue gymCommandsSetCommand;
-    private static ForgeConfigSpec.IntValue gymCommandsGetCommand;
-    private static ForgeConfigSpec.IntValue starterSetCommand;
-    private static ForgeConfigSpec.IntValue starterViewCommand;
+    private static ModConfigSpec.IntValue gymGUICommand;
+    private static ModConfigSpec.IntValue gymGUICommandOther;
+    private static ModConfigSpec.IntValue badgesCommand;
+    private static ModConfigSpec.IntValue badgesCommandOther;
+    private static ModConfigSpec.IntValue badgesAddCommand;
+    private static ModConfigSpec.IntValue badgesRemoveCommand;
+    private static ModConfigSpec.IntValue badgesDevCommand;
+    private static ModConfigSpec.IntValue gymCommandsSetCommand;
+    private static ModConfigSpec.IntValue gymCommandsGetCommand;
+    private static ModConfigSpec.IntValue starterSetCommand;
+    private static ModConfigSpec.IntValue starterViewCommand;
 
-    private static ForgeConfigSpec.ConfigValue<String> indigoBoulderGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> indigoCascadeGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> indigoThunderGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> indigoRainbowGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> indigoSoulGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> indigoMarshGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> indigoVolcanoGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> indigoEarthGymCommand;
+    private static ModConfigSpec.ConfigValue<String> indigoBoulderGymCommand;
+    private static ModConfigSpec.ConfigValue<String> indigoCascadeGymCommand;
+    private static ModConfigSpec.ConfigValue<String> indigoThunderGymCommand;
+    private static ModConfigSpec.ConfigValue<String> indigoRainbowGymCommand;
+    private static ModConfigSpec.ConfigValue<String> indigoSoulGymCommand;
+    private static ModConfigSpec.ConfigValue<String> indigoMarshGymCommand;
+    private static ModConfigSpec.ConfigValue<String> indigoVolcanoGymCommand;
+    private static ModConfigSpec.ConfigValue<String> indigoEarthGymCommand;
 
-    private static ForgeConfigSpec.ConfigValue<String> johtoZephyrGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> johtoHiveGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> johtoPlainGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> johtoFogGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> johtoStormGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> johtoMineralGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> johtoGlacierGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> johtoRisingGymCommand;
+    private static ModConfigSpec.ConfigValue<String> johtoZephyrGymCommand;
+    private static ModConfigSpec.ConfigValue<String> johtoHiveGymCommand;
+    private static ModConfigSpec.ConfigValue<String> johtoPlainGymCommand;
+    private static ModConfigSpec.ConfigValue<String> johtoFogGymCommand;
+    private static ModConfigSpec.ConfigValue<String> johtoStormGymCommand;
+    private static ModConfigSpec.ConfigValue<String> johtoMineralGymCommand;
+    private static ModConfigSpec.ConfigValue<String> johtoGlacierGymCommand;
+    private static ModConfigSpec.ConfigValue<String> johtoRisingGymCommand;
 
-    private static ForgeConfigSpec.ConfigValue<String> hoennStoneGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> hoennKnuckleGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> hoennDynamoGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> hoennHeatGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> hoennBalanceGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> hoennFeatherGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> hoennMindGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> hoennRainGymCommand;
+    private static ModConfigSpec.ConfigValue<String> hoennStoneGymCommand;
+    private static ModConfigSpec.ConfigValue<String> hoennKnuckleGymCommand;
+    private static ModConfigSpec.ConfigValue<String> hoennDynamoGymCommand;
+    private static ModConfigSpec.ConfigValue<String> hoennHeatGymCommand;
+    private static ModConfigSpec.ConfigValue<String> hoennBalanceGymCommand;
+    private static ModConfigSpec.ConfigValue<String> hoennFeatherGymCommand;
+    private static ModConfigSpec.ConfigValue<String> hoennMindGymCommand;
+    private static ModConfigSpec.ConfigValue<String> hoennRainGymCommand;
 
-    private static ForgeConfigSpec.ConfigValue<String> sinnohCoalGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> sinnohForestGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> sinnohCobbleGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> sinnohFenGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> sinnohRelicGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> sinnohMineGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> sinnohIcicleGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> sinnohBeaconGymCommand;
+    private static ModConfigSpec.ConfigValue<String> sinnohCoalGymCommand;
+    private static ModConfigSpec.ConfigValue<String> sinnohForestGymCommand;
+    private static ModConfigSpec.ConfigValue<String> sinnohCobbleGymCommand;
+    private static ModConfigSpec.ConfigValue<String> sinnohFenGymCommand;
+    private static ModConfigSpec.ConfigValue<String> sinnohRelicGymCommand;
+    private static ModConfigSpec.ConfigValue<String> sinnohMineGymCommand;
+    private static ModConfigSpec.ConfigValue<String> sinnohIcicleGymCommand;
+    private static ModConfigSpec.ConfigValue<String> sinnohBeaconGymCommand;
 
-    private static ForgeConfigSpec.ConfigValue<String> unovaTrioGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> unovaBasicGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> unovaToxicGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> unovaInsectGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> unovaBoltGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> unovaQuakeGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> unovaJetGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> unovaFreezeGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> unovaLegendGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> unovaWaveGymCommand;
+    private static ModConfigSpec.ConfigValue<String> unovaTrioGymCommand;
+    private static ModConfigSpec.ConfigValue<String> unovaBasicGymCommand;
+    private static ModConfigSpec.ConfigValue<String> unovaToxicGymCommand;
+    private static ModConfigSpec.ConfigValue<String> unovaInsectGymCommand;
+    private static ModConfigSpec.ConfigValue<String> unovaBoltGymCommand;
+    private static ModConfigSpec.ConfigValue<String> unovaQuakeGymCommand;
+    private static ModConfigSpec.ConfigValue<String> unovaJetGymCommand;
+    private static ModConfigSpec.ConfigValue<String> unovaFreezeGymCommand;
+    private static ModConfigSpec.ConfigValue<String> unovaLegendGymCommand;
+    private static ModConfigSpec.ConfigValue<String> unovaWaveGymCommand;
 
-    private static ForgeConfigSpec.ConfigValue<String> kalosBugGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> kalosCliffGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> kalosRumbleGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> kalosPlantGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> kalosVoltageGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> kalosFairyGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> kalosPsychicGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> kalosIcebergGymCommand;
+    private static ModConfigSpec.ConfigValue<String> kalosBugGymCommand;
+    private static ModConfigSpec.ConfigValue<String> kalosCliffGymCommand;
+    private static ModConfigSpec.ConfigValue<String> kalosRumbleGymCommand;
+    private static ModConfigSpec.ConfigValue<String> kalosPlantGymCommand;
+    private static ModConfigSpec.ConfigValue<String> kalosVoltageGymCommand;
+    private static ModConfigSpec.ConfigValue<String> kalosFairyGymCommand;
+    private static ModConfigSpec.ConfigValue<String> kalosPsychicGymCommand;
+    private static ModConfigSpec.ConfigValue<String> kalosIcebergGymCommand;
 
-    private static ForgeConfigSpec.ConfigValue<String> galarGrassGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> galarWaterGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> galarFireGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> galarFightingGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> galarGhostGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> galarFairyGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> galarRockGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> galarIceGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> galarDarkGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> galarDragonGymCommand;
+    private static ModConfigSpec.ConfigValue<String> galarGrassGymCommand;
+    private static ModConfigSpec.ConfigValue<String> galarWaterGymCommand;
+    private static ModConfigSpec.ConfigValue<String> galarFireGymCommand;
+    private static ModConfigSpec.ConfigValue<String> galarFightingGymCommand;
+    private static ModConfigSpec.ConfigValue<String> galarGhostGymCommand;
+    private static ModConfigSpec.ConfigValue<String> galarFairyGymCommand;
+    private static ModConfigSpec.ConfigValue<String> galarRockGymCommand;
+    private static ModConfigSpec.ConfigValue<String> galarIceGymCommand;
+    private static ModConfigSpec.ConfigValue<String> galarDarkGymCommand;
+    private static ModConfigSpec.ConfigValue<String> galarDragonGymCommand;
 
-    private static ForgeConfigSpec.ConfigValue<String> paldeaBugGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> paldeaGrassGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> paldeaElectricGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> paldeaWaterGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> paldeaNormalGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> paldeaGhostGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> paldeaPsychicGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> paldeaIceGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> paldeaDarkGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> paldeaFireGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> paldeaPoisonGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> paldeaFairyGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> paldeaFightingGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> paldeaRockGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> paldeaFlyingGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> paldeaSteelGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> paldeaGroundGymCommand;
-    private static ForgeConfigSpec.ConfigValue<String> paldeaDragonGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaBugGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaGrassGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaElectricGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaWaterGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaNormalGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaGhostGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaPsychicGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaIceGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaDarkGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaFireGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaPoisonGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaFairyGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaFightingGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaRockGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaFlyingGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaSteelGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaGroundGymCommand;
+    private static ModConfigSpec.ConfigValue<String> paldeaDragonGymCommand;
 
     static {
-        ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+        ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
         setupConfig(builder);
         setupCommandMap();
         CONFIG_SPEC = builder.build();
     }
 
-    private static void setupConfig(ForgeConfigSpec.Builder builder) {
+    private static void setupConfig(ModConfigSpec.Builder builder) {
         builder.push("CobblemonGyms");
         builder.comment("Required permission levels for commands. [0 (all), 1 (moderator), 2 (gamemaster), 3 (admin), and 4 (owner)]");
         builder.push("Commands");

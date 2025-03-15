@@ -1,13 +1,12 @@
 package com.markflynnman.cobblemon_gyms.screens;
 
 import com.markflynnman.cobblemon_gyms.CobblemonGyms;
-import com.markflynnman.cobblemon_gyms.capabilities.ClientBadgeCollectionData;
-import com.markflynnman.cobblemon_gyms.capabilities.PlayerBadgeCollection;
+import com.markflynnman.cobblemon_gyms.data_attachments.ClientBadgeCollectionData;
+import com.markflynnman.cobblemon_gyms.data_attachments.PlayerBadgeCollection;
 import com.markflynnman.cobblemon_gyms.components.CobblemonGymsGUITools;
 import com.markflynnman.cobblemon_gyms.components.ItemButton;
 import com.markflynnman.cobblemon_gyms.items.GymBadges;
 import com.markflynnman.cobblemon_gyms.menus.SinnohLeagueMenu;
-import com.markflynnman.cobblemon_gyms.network.PacketHandler;
 import com.markflynnman.cobblemon_gyms.network.SGymSelectionPacket;
 import com.markflynnman.cobblemon_gyms.network.SOpenScreenPacket;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -20,9 +19,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class SinnohLeagueGUI extends AbstractContainerScreen<SinnohLeagueMenu> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(CobblemonGyms.MODID, "textures/gui/cobblemongymsgui.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(CobblemonGyms.MODID, "textures/gui/cobblemongymsgui.png");
     protected final Minecraft minecraftInstance;
     private static final int bgWidth = 180;
     private static final int bgHeight = 108;
@@ -45,12 +45,12 @@ public class SinnohLeagueGUI extends AbstractContainerScreen<SinnohLeagueMenu> {
     }
 
     public void gymSelect(String pCommand) {
-        PacketHandler.sendToServer(new SGymSelectionPacket(pCommand));
+        PacketDistributor.sendToServer(new SGymSelectionPacket(pCommand));
         closeScreen();
     }
 
     public void openScreen(String screen) {
-        PacketHandler.sendToServer(new SOpenScreenPacket(screen));
+        PacketDistributor.sendToServer(new SOpenScreenPacket(screen));
     }
 
     @Override
@@ -66,7 +66,7 @@ public class SinnohLeagueGUI extends AbstractContainerScreen<SinnohLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Sinnoh_Coal"); },
+                onPress -> { gymSelect("sinnoh_coal"); },
                 new ItemStack(GymBadges.COAL_BADGE.get()),
                 false
         ));
@@ -77,9 +77,9 @@ public class SinnohLeagueGUI extends AbstractContainerScreen<SinnohLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Sinnoh_Forest"); },
+                onPress -> { gymSelect("sinnoh_forest"); },
                 new ItemStack(GymBadges.FOREST_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Sinnoh_Forest")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("sinnoh_forest")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -88,9 +88,9 @@ public class SinnohLeagueGUI extends AbstractContainerScreen<SinnohLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Sinnoh_Cobble"); },
+                onPress -> { gymSelect("sinnoh_cobble"); },
                 new ItemStack(GymBadges.COBBLE_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Sinnoh_Cobble")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("sinnoh_cobble")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -99,9 +99,9 @@ public class SinnohLeagueGUI extends AbstractContainerScreen<SinnohLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Sinnoh_Fen"); },
+                onPress -> { gymSelect("sinnoh_fen"); },
                 new ItemStack(GymBadges.FEN_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Sinnoh_Fen")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("sinnoh_fen")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -110,9 +110,9 @@ public class SinnohLeagueGUI extends AbstractContainerScreen<SinnohLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Sinnoh_Relic"); },
+                onPress -> { gymSelect("sinnoh_relic"); },
                 new ItemStack(GymBadges.RELIC_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Sinnoh_Relic")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("sinnoh_relic")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -121,9 +121,9 @@ public class SinnohLeagueGUI extends AbstractContainerScreen<SinnohLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Sinnoh_Mine"); },
+                onPress -> { gymSelect("sinnoh_mine"); },
                 new ItemStack(GymBadges.MINE_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Sinnoh_Mine")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("sinnoh_mine")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -132,9 +132,9 @@ public class SinnohLeagueGUI extends AbstractContainerScreen<SinnohLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Sinnoh_Icicle"); },
+                onPress -> { gymSelect("sinnoh_icicle"); },
                 new ItemStack(GymBadges.ICICLE_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Sinnoh_Icicle")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("sinnoh_icicle")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -143,9 +143,9 @@ public class SinnohLeagueGUI extends AbstractContainerScreen<SinnohLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Sinnoh_Beacon"); },
+                onPress -> { gymSelect("sinnoh_beacon"); },
                 new ItemStack(GymBadges.BEACON_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Sinnoh_Beacon")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("sinnoh_beacon")-1] == 0
         ));
     }
 
@@ -167,7 +167,7 @@ public class SinnohLeagueGUI extends AbstractContainerScreen<SinnohLeagueMenu> {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        renderBackground(guiGraphics);
+//        renderBackground(guiGraphics, mouseX, mouseY, delta);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
 

@@ -5,8 +5,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 
 public class JohtoLeagueMenu extends AbstractContainerMenu {
     private final Level level;
@@ -21,15 +21,6 @@ public class JohtoLeagueMenu extends AbstractContainerMenu {
         checkContainerSize(inv, 2);
         this.level = inv.player.level();
         this.data = data;
-
-//        addPlayerInventory(inv);
-//        addPlayerHotbar(inv);
-
-//        this.addSlot(new SlotItemHandler(dataInventory, 0, 80, 11));
-//        this.addSlot(new SlotItemHandler(dataInventory, 1, 80, 59));
-
-//        addDataSlots(data);
-
     }
 
     @Override

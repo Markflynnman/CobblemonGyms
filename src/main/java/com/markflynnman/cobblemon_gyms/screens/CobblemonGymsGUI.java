@@ -6,7 +6,6 @@ import com.markflynnman.cobblemon_gyms.components.EEButton;
 import com.markflynnman.cobblemon_gyms.components.ItemButton;
 import com.markflynnman.cobblemon_gyms.items.GymBadges;
 import com.markflynnman.cobblemon_gyms.menus.CobblemonGymsMenu;
-import com.markflynnman.cobblemon_gyms.network.PacketHandler;
 import com.markflynnman.cobblemon_gyms.network.SOpenScreenPacket;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -18,10 +17,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class CobblemonGymsGUI extends AbstractContainerScreen<CobblemonGymsMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(CobblemonGyms.MODID, "textures/gui/cobblemongymsgui.png");
+            ResourceLocation.fromNamespaceAndPath(CobblemonGyms.MODID, "textures/gui/cobblemongymsgui.png");
     protected final Minecraft minecraftInstance;
     private static final int bgWidth = 180;
     private static final int bgHeight = 172;
@@ -36,7 +36,7 @@ public class CobblemonGymsGUI extends AbstractContainerScreen<CobblemonGymsMenu>
     }
 
     public void openScreen(String screen) {
-        PacketHandler.sendToServer(new SOpenScreenPacket(screen));
+        PacketDistributor.sendToServer(new SOpenScreenPacket(screen));
     }
 
     @Override
@@ -180,7 +180,7 @@ public class CobblemonGymsGUI extends AbstractContainerScreen<CobblemonGymsMenu>
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        renderBackground(guiGraphics);
+//        renderBackground(guiGraphics, mouseX, mouseY, delta);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
 

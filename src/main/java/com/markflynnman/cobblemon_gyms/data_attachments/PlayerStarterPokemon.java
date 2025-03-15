@@ -1,9 +1,11 @@
-package com.markflynnman.cobblemon_gyms.capabilities;
+package com.markflynnman.cobblemon_gyms.data_attachments;
 
 import com.cobblemon.mod.common.pokemon.Pokemon;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.neoforged.neoforge.common.util.INBTSerializable;
 
-public class PlayerStarterPokemon {
+public class PlayerStarterPokemon implements INBTSerializable<CompoundTag> {
     private String starterPokemon;
     private String starterPokemonType;
     private int starterPokemonDex;
@@ -30,6 +32,23 @@ public class PlayerStarterPokemon {
         this.starterPokemonDex = source.starterPokemonDex;
     }
 
+    @Override
+    public CompoundTag serializeNBT(HolderLookup.Provider provider) {
+        CompoundTag tag = new CompoundTag();
+        tag.putString("name", starterPokemon);
+        tag.putString("type", starterPokemonType);
+        tag.putInt("dex", starterPokemonDex);
+        return tag;
+    }
+
+    @Override
+    public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
+        starterPokemon = nbt.getString("name");
+        starterPokemonType = nbt.getString("type");
+        starterPokemonDex = nbt.getInt("dex");
+    }
+
+    // Remove
     public void saveNBTData(CompoundTag nbt) {
         nbt.putString("name", starterPokemon);
         nbt.putString("type", starterPokemonType);

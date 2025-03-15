@@ -1,13 +1,12 @@
 package com.markflynnman.cobblemon_gyms.screens;
 
 import com.markflynnman.cobblemon_gyms.CobblemonGyms;
-import com.markflynnman.cobblemon_gyms.capabilities.ClientBadgeCollectionData;
-import com.markflynnman.cobblemon_gyms.capabilities.PlayerBadgeCollection;
+import com.markflynnman.cobblemon_gyms.data_attachments.ClientBadgeCollectionData;
+import com.markflynnman.cobblemon_gyms.data_attachments.PlayerBadgeCollection;
 import com.markflynnman.cobblemon_gyms.components.CobblemonGymsGUITools;
 import com.markflynnman.cobblemon_gyms.components.ItemButton;
 import com.markflynnman.cobblemon_gyms.items.GymBadges;
 import com.markflynnman.cobblemon_gyms.menus.IndigoLeagueMenu;
-import com.markflynnman.cobblemon_gyms.network.PacketHandler;
 import com.markflynnman.cobblemon_gyms.network.SGymSelectionPacket;
 import com.markflynnman.cobblemon_gyms.network.SOpenScreenPacket;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -20,9 +19,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class IndigoLeagueGUI extends AbstractContainerScreen<IndigoLeagueMenu> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(CobblemonGyms.MODID, "textures/gui/cobblemongymsgui.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(CobblemonGyms.MODID, "textures/gui/cobblemongymsgui.png");
     protected final Minecraft minecraftInstance;
     private static final int bgWidth = 180;
     private static final int bgHeight = 108;
@@ -45,12 +45,12 @@ public class IndigoLeagueGUI extends AbstractContainerScreen<IndigoLeagueMenu> {
     }
 
     public void gymSelect(String pCommand) {
-        PacketHandler.sendToServer(new SGymSelectionPacket(pCommand));
+        PacketDistributor.sendToServer(new SGymSelectionPacket(pCommand));
         closeScreen();
     }
 
     public void openScreen(String screen) {
-        PacketHandler.sendToServer(new SOpenScreenPacket(screen));
+        PacketDistributor.sendToServer(new SOpenScreenPacket(screen));
     }
 
     @Override
@@ -66,7 +66,7 @@ public class IndigoLeagueGUI extends AbstractContainerScreen<IndigoLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Indigo_Boulder"); },
+                onPress -> { gymSelect("indigo_boulder"); },
                 new ItemStack(GymBadges.BOULDER_BADGE.get()),
                 false
         ));
@@ -77,9 +77,9 @@ public class IndigoLeagueGUI extends AbstractContainerScreen<IndigoLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Indigo_Cascade"); },
+                onPress -> { gymSelect("indigo_cascade"); },
                 new ItemStack(GymBadges.CASCADE_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Indigo_Cascade")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("indigo_cascade")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -88,9 +88,9 @@ public class IndigoLeagueGUI extends AbstractContainerScreen<IndigoLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Indigo_Thunder"); },
+                onPress -> { gymSelect("indigo_thunder"); },
                 new ItemStack(GymBadges.THUNDER_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Indigo_Thunder")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("indigo_thunder")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -99,9 +99,9 @@ public class IndigoLeagueGUI extends AbstractContainerScreen<IndigoLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Indigo_Rainbow"); },
+                onPress -> { gymSelect("indigo_rainbow"); },
                 new ItemStack(GymBadges.RAINBOW_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Indigo_Rainbow")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("indigo_rainbow")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -110,9 +110,9 @@ public class IndigoLeagueGUI extends AbstractContainerScreen<IndigoLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Indigo_Soul"); },
+                onPress -> { gymSelect("indigo_soul"); },
                 new ItemStack(GymBadges.SOUL_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Indigo_Soul")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("indigo_soul")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -121,9 +121,9 @@ public class IndigoLeagueGUI extends AbstractContainerScreen<IndigoLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Indigo_Marsh"); },
+                onPress -> { gymSelect("indigo_marsh"); },
                 new ItemStack(GymBadges.MARSH_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Indigo_Marsh")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("indigo_marsh")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -132,9 +132,9 @@ public class IndigoLeagueGUI extends AbstractContainerScreen<IndigoLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Indigo_Volcano"); },
+                onPress -> { gymSelect("indigo_volcano"); },
                 new ItemStack(GymBadges.VOLCANO_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Indigo_Volcano")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("indigo_volcano")-1] == 0
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -143,9 +143,9 @@ public class IndigoLeagueGUI extends AbstractContainerScreen<IndigoLeagueMenu> {
                 3, 9, 9,
                 0, 21, 9,
                 0, 12,
-                onPress -> { gymSelect("Indigo_Earth"); },
+                onPress -> { gymSelect("indigo_earth"); },
                 new ItemStack(GymBadges.EARTH_BADGE.get()),
-                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("Indigo_Earth")-1] == 0
+                ClientBadgeCollectionData.getPlayerBadgeCollection()[PlayerBadgeCollection.AllBadges.indexOf("indigo_earth")-1] == 0
         ));
     }
 
@@ -167,7 +167,7 @@ public class IndigoLeagueGUI extends AbstractContainerScreen<IndigoLeagueMenu> {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        renderBackground(guiGraphics);
+//        renderBackground(guiGraphics, mouseX, mouseY, delta);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
 

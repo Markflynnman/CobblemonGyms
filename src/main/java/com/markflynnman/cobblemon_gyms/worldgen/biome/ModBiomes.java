@@ -2,20 +2,20 @@ package com.markflynnman.cobblemon_gyms.worldgen.biome;
 
 import com.markflynnman.cobblemon_gyms.CobblemonGyms;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.*;
 
 public class ModBiomes {
     public static final ResourceKey<Biome> GYM_BIOME = ResourceKey.create(Registries.BIOME,
-            new ResourceLocation(CobblemonGyms.MODID, "gym_biome"));
+            ResourceLocation.fromNamespaceAndPath(CobblemonGyms.MODID, "gym_biome"));
 
-    public static void bootstrap(BootstapContext<Biome> context) {
+    public static void bootstrap(BootstrapContext<Biome> context) {
         context.register(GYM_BIOME, gymBiome(context));
     }
 
-    public static Biome gymBiome(BootstapContext<Biome> context) {
+    public static Biome gymBiome(BootstrapContext<Biome> context) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
 
         BiomeGenerationSettings.Builder biomeBuilder =

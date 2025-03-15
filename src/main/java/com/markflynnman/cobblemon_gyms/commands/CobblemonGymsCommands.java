@@ -3,8 +3,9 @@ package com.markflynnman.cobblemon_gyms.commands;
 import com.cobblemon.mod.common.api.pokemon.PokemonProperties;
 import com.cobblemon.mod.common.command.argument.PokemonPropertiesArgumentType;
 import com.markflynnman.cobblemon_gyms.Config;
-import com.markflynnman.cobblemon_gyms.capabilities.PlayerBadgeCollectionProvider;
-import com.markflynnman.cobblemon_gyms.capabilities.PlayerStarterPokemonProvider;
+import com.markflynnman.cobblemon_gyms.data_attachments.Attachments;
+import com.markflynnman.cobblemon_gyms.data_attachments.PlayerBadgeCollection;
+import com.markflynnman.cobblemon_gyms.data_attachments.PlayerStarterPokemon;
 import com.markflynnman.cobblemon_gyms.menus.CobblemonGymsMenu;
 import com.markflynnman.cobblemon_gyms.network.CBadgeCollectionDataSyncPacket;
 import com.markflynnman.cobblemon_gyms.network.PacketHandler;
@@ -18,7 +19,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.SimpleMenuProvider;
-import net.minecraftforge.network.NetworkHooks;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.slf4j.Logger;
 
 public class CobblemonGymsCommands {
@@ -73,11 +74,11 @@ public class CobblemonGymsCommands {
         }, true);
         LOGGER.warn("Open GUI for "+player_name);
 
-        pPlayer.getCapability(PlayerBadgeCollectionProvider.PLAYER_BADGE_COLLECTION).ifPresent(badgeCollection -> {
-            PacketHandler.sendToPlayer(new CBadgeCollectionDataSyncPacket(badgeCollection.getBadgeCollection()), pPlayer);
-        });
+        if (pPlayer.hasData(Attachments.PLAYER_BADGE_COLLECTION)) {
+            PacketDistributor.sendToPlayer(pPlayer, new CBadgeCollectionDataSyncPacket(pPlayer.getData(Attachments.PLAYER_BADGE_COLLECTION).getBadgeCollection()));
+        }
 
-        NetworkHooks.openScreen(pPlayer, new SimpleMenuProvider(
+        pPlayer.openMenu(new SimpleMenuProvider(
                 (contentId, playerInventory, player) -> new CobblemonGymsMenu(contentId, playerInventory),
                 Component.literal("Cobblemon Gyms GUI")
         ));
@@ -114,11 +115,12 @@ public class CobblemonGymsCommands {
     private int ViewStarter(CommandSourceStack source, ServerPlayer pPlayer) {
         String player_name = pPlayer.getName().toString().replace("literal{", "").replace("}", "");
 
-        pPlayer.getCapability(PlayerStarterPokemonProvider.PLAYER_STARTER_POKEMON).ifPresent(starterPokemon -> {
+        if (pPlayer.hasData(Attachments.PLAYER_STARTER_POKEMON)) {
+            PlayerStarterPokemon starterPokemon = pPlayer.getData(Attachments.PLAYER_STARTER_POKEMON);
             source.sendSuccess(() -> {
                 return Component.literal(((source.getPlayer() == pPlayer) ? "Your" : player_name + "'s") + " starter: " + starterPokemon.getStarterPokemon() + ", Type: " + starterPokemon.getStarterPokemonType() + ", Dex number: " + starterPokemon.getStarterPokemonDex());
             }, false);
-        });
+        }
 
         return 1;
     }
@@ -130,12 +132,14 @@ public class CobblemonGymsCommands {
             return -1;
         }
 
-        pPlayer.getCapability(PlayerStarterPokemonProvider.PLAYER_STARTER_POKEMON).ifPresent(starterPokemon -> {
+        if (pPlayer.hasData(Attachments.PLAYER_STARTER_POKEMON)) {
+            PlayerStarterPokemon starterPokemon = pPlayer.getData(Attachments.PLAYER_STARTER_POKEMON);
+
             starterPokemon.setStarterPokemon(pPokemon.create());
             source.sendSuccess(() -> {
                 return Component.literal("Set " + player_name + "'s starter pokemon to: " + starterPokemon.getStarterPokemon() + ", Type: " + starterPokemon.getStarterPokemonType() + ", Dex number: " + starterPokemon.getStarterPokemonDex());
             }, true);
-        });
+        }
 
         return 1;
     }

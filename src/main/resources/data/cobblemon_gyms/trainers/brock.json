@@ -1,0 +1,37 @@
+{
+  "name": "Brock",
+  "nameNPC": "brock",
+  "badge": "indigo_boulder",
+  "modelType": "humanoid",
+  "elementalType": "rock",
+  "team": [
+    {
+      "species": "geodude",
+      "gender": "MALE",
+      "level": 12,
+      "nature": "bashful",
+      "ability": "sturdy",
+      "moveset": [
+        "tackle",
+        "defensecurl"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "onix",
+      "gender": "MALE",
+      "level": 14,
+      "nature": "bashful",
+      "ability": "sturdy",
+      "moveset": [
+        "tackle",
+        "harden",
+        "bind",
+        "rocktomb"
+      ],
+      "ivs": {},
+      "evs": {}
+    }
+  ]
+}

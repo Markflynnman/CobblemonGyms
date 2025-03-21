@@ -34,11 +34,9 @@ public record CBadgeCollectionDataSyncPacket(int[] badgeCollection) implements C
         return new CBadgeCollectionDataSyncPacket(buffer.readVarIntArray());
     }
 
-    private static final Logger LOGGER = LogUtils.getLogger();
     public static void handle(final CBadgeCollectionDataSyncPacket packet, final IPayloadContext context) {
         context.enqueueWork(() -> {
             // ON CLIENT
-            LOGGER.info("Received c_badge_collection_data_sync_packet");
             ClientBadgeCollectionData.set(packet.badgeCollection);
         });
     }

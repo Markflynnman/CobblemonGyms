@@ -18,6 +18,9 @@ public class Attachments {
     public static final Supplier<AttachmentType<PlayerStarterPokemon>> PLAYER_STARTER_POKEMON = ATTACHMENT_TYPES.register(
             "player_starter_pokemon", () -> AttachmentType.serializable(PlayerStarterPokemon::new).copyOnDeath().build()
     );
+    public static final Supplier<AttachmentType<PlayerWarpHistory>> PLAYER_WARP_HISTORY = ATTACHMENT_TYPES.register(
+            "player_warp_history", () -> AttachmentType.serializable(PlayerWarpHistory::new).copyOnDeath().build()
+    );
 
     public static void register(IEventBus modEventBus) {
         ATTACHMENT_TYPES.register(modEventBus);

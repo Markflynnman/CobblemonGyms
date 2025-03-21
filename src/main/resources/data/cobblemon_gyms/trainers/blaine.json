@@ -1,0 +1,82 @@
+{
+  "name": "Blaine",
+  "nameNPC": "blaine",
+  "badge": "indigo_volcano",
+  "modelType": "humanoid",
+  "elementalType": "fire",
+  "battleRules": {
+    "maxItemUses": 3
+  },
+  "bag": [
+    {
+      "item": "cobblemon:hyper_potion",
+      "quantity": 2
+    },
+    {
+      "item": "cobblemon:full_heal",
+      "quantity": 1
+    }
+  ],
+  "team": [
+    {
+      "species": "growlithe",
+      "gender": "MALE",
+      "level": 42,
+      "nature": "bashful",
+      "ability": "intimidate",
+      "moveset": [
+        "bite",
+        "roar",
+        "takedown",
+        "fireblast"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "ponyta",
+      "gender": "MALE",
+      "level": 40,
+      "nature": "bashful",
+      "ability": "flashfire",
+      "moveset": [
+        "stomp",
+        "bounce",
+        "firespin",
+        "fireblast"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "rapidash",
+      "gender": "MALE",
+      "level": 42,
+      "nature": "bashful",
+      "ability": "flashfire",
+      "moveset": [
+        "stomp",
+        "bounce",
+        "firespin",
+        "fireblast"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "arcanine",
+      "gender": "MALE",
+      "level": 47,
+      "nature": "bashful",
+      "ability": "intimidate",
+      "moveset": [
+        "bite",
+        "roar",
+        "takedown",
+        "fireblast"
+      ],
+      "ivs": {},
+      "evs": {}
+    }
+  ]
+}

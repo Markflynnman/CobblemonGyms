@@ -58,6 +58,7 @@ public class CobblemonGymsGUI extends AbstractContainerScreen<CobblemonGymsMenu>
                 Component.literal("Indigo"),
                 false
         ));
+        // TODO Change pDisabled back to false when gyms are done
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
                 (width/2)+buttonPadding, (height/2)-(buttonHeight*2)-(buttonPadding*3),
@@ -69,7 +70,7 @@ public class CobblemonGymsGUI extends AbstractContainerScreen<CobblemonGymsMenu>
                 new ItemStack(GymBadges.ZEPHYR_BADGE.get()),
                 (width/2)+buttonPadding, (height/2)-(buttonHeight*2)-(buttonPadding*3), 4,
                 Component.literal("Johto"),
-                false
+                true
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -82,7 +83,7 @@ public class CobblemonGymsGUI extends AbstractContainerScreen<CobblemonGymsMenu>
                 new ItemStack(GymBadges.STONE_BADGE.get()),
                 (width/2)-buttonWidth-buttonPadding, (height/2)-buttonHeight-buttonPadding, 4,
                 Component.literal("Hoenn"),
-                false
+                true
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -95,7 +96,7 @@ public class CobblemonGymsGUI extends AbstractContainerScreen<CobblemonGymsMenu>
                 new ItemStack(GymBadges.COAL_BADGE.get()),
                 (width/2)+buttonPadding, (height/2)-buttonHeight-buttonPadding, 4,
                 Component.literal("Sinnoh"),
-                false
+                true
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -108,7 +109,7 @@ public class CobblemonGymsGUI extends AbstractContainerScreen<CobblemonGymsMenu>
                 new ItemStack(GymBadges.TRIO_BADGE.get()),
                 (width/2)-buttonWidth-buttonPadding, (height/2)+buttonPadding, 4,
                 Component.literal("Unova"),
-                false
+                true
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -121,7 +122,7 @@ public class CobblemonGymsGUI extends AbstractContainerScreen<CobblemonGymsMenu>
                 new ItemStack(GymBadges.BUG_BADGE.get()),
                 (width/2)+buttonPadding, (height/2)+buttonPadding, 4,
                 Component.literal("Kalos"),
-                false
+                true
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -134,7 +135,7 @@ public class CobblemonGymsGUI extends AbstractContainerScreen<CobblemonGymsMenu>
                 new ItemStack(GymBadges.SAS_GRASS_BADGE.get()),
                 (width/2)-buttonWidth-buttonPadding, (height/2)+buttonHeight+(buttonPadding*3), 4,
                 Component.literal("Galar"),
-                false
+                true
         ));
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
@@ -147,19 +148,19 @@ public class CobblemonGymsGUI extends AbstractContainerScreen<CobblemonGymsMenu>
                 new ItemStack(GymBadges.SV_BUG_BADGE.get()),
                 (width/2)+buttonPadding, (height/2)+buttonHeight+(buttonPadding*3), 4,
                 Component.literal("Paldea"),
-                false
+                true
         ));
 
-        this.addRenderableWidget(new EEButton(
-                TEXTURE,
-                (width/2)+1, ((height-bgHeight)/2)+8,
-                3, 3,
-                4, 4,
-                12, 0,
-                4, 4,
-                onPress -> { openScreen(""); },
-                false
-        ));
+//        this.addRenderableWidget(new EEButton(
+//                TEXTURE,
+//                (width/2)+1, ((height-bgHeight)/2)+8,
+//                3, 3,
+//                4, 4,
+//                12, 0,
+//                4, 4,
+//                onPress -> { openScreen(""); },
+//                true
+//        ));
     }
 
     @Override

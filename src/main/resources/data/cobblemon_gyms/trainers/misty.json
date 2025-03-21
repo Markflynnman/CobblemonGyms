@@ -1,0 +1,48 @@
+{
+  "name": "Misty",
+  "nameNPC": "misty",
+  "badge": "indigo_cascade",
+  "modelType": "humanoid_slim",
+  "elementalType": "water",
+  "battleRules": {
+    "maxItemUses": 1
+  },
+  "bag": [
+    {
+      "item": "cobblemon:super_potion",
+      "quantity": 1
+    }
+  ],
+  "team": [
+    {
+      "species": "staryu",
+      "gender": "GENDERLESS",
+      "level": 18,
+      "nature": "bashful",
+      "ability": "naturalcure",
+      "moveset": [
+        "tackle",
+        "harden",
+        "recover",
+        "waterpulse"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "starmie",
+      "gender": "GENDERLESS",
+      "level": 21,
+      "nature": "bashful",
+      "ability": "naturalcure",
+      "moveset": [
+        "rapidspin",
+        "swift",
+        "recover",
+        "waterpulse"
+      ],
+      "ivs": {},
+      "evs": {}
+    }
+  ]
+}

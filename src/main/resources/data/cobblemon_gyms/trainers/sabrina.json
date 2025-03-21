@@ -1,0 +1,82 @@
+{
+  "name": "Sabrina",
+  "nameNPC": "sabrina",
+  "badge": "indigo_marsh",
+  "modelType": "humanoid_slim",
+  "elementalType": "psychic",
+  "battleRules": {
+    "maxItemUses": 3
+  },
+  "bag": [
+    {
+      "item": "cobblemon:hyper_potion",
+      "quantity": 2
+    },
+    {
+      "item": "cobblemon:full_heal",
+      "quantity": 1
+    }
+  ],
+  "team": [
+    {
+      "species": "kadabra",
+      "gender": "MALE",
+      "level": 38,
+      "nature": "bashful",
+      "ability": "synchronize",
+      "moveset": [
+        "psybeam",
+        "reflect",
+        "futuresight",
+        "calmmind"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "mrmime",
+      "gender": "FEMALE",
+      "level": 37,
+      "nature": "bashful",
+      "ability": "soundproof",
+      "moveset": [
+        "barrier",
+        "psybeam",
+        "batonpass",
+        "calmmind"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "venomoth",
+      "gender": "FEMALE",
+      "level": 38,
+      "nature": "bashful",
+      "ability": "shielddust",
+      "moveset": [
+        "psybeam",
+        "gust",
+        "leechlife",
+        "supersonic"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "alakazam",
+      "gender": "MALE",
+      "level": 43,
+      "nature": "bashful",
+      "ability": "synchronize",
+      "moveset": [
+        "psychic",
+        "recover",
+        "futuresight",
+        "calmmind"
+      ],
+      "ivs": {},
+      "evs": {}
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "name": "Giovanni",
+  "nameNPC": "giovanni",
+  "badge": "indigo_earth",
+  "modelType": "humanoid",
+  "elementalType": "ground",
+  "battleRules": {
+    "maxItemUses": 3
+  },
+  "bag": [
+    {
+      "item": "cobblemon:hyper_potion",
+      "quantity": 2
+    },
+    {
+      "item": "cobblemon:full_heal",
+      "quantity": 1
+    }
+  ],
+  "team": [
+    {
+      "species": "rhyhorn",
+      "gender": "MALE",
+      "level": 45,
+      "nature": "bashful",
+      "ability": "lightningrod",
+      "moveset": [
+        "takedown",
+        "rockblast",
+        "scaryface",
+        "earthquake"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "dugtrio",
+      "gender": "MALE",
+      "level": 42,
+      "nature": "bashful",
+      "ability": "sandveil",
+      "moveset": [
+        "slash",
+        "sandtomb",
+        "mudslap",
+        "earthquake"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "nidoqueen",
+      "gender": "FEMALE",
+      "level": 44,
+      "nature": "bashful",
+      "ability": "poisonpoint",
+      "moveset": [
+        "doublekick",
+        "earthquake",
+        "poisonsting",
+        "bodyslam"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "nidoking",
+      "gender": "MALE",
+      "level": 45,
+      "nature": "bashful",
+      "ability": "poisonpoint",
+      "moveset": [
+        "doublekick",
+        "earthquake",
+        "poisonsting",
+        "thrash"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "rhyhorn",
+      "gender": "MALE",
+      "level": 50,
+      "nature": "bashful",
+      "ability": "lightningrod",
+      "moveset": [
+        "takedown",
+        "rockblast",
+        "scaryface",
+        "earthquake"
+      ],
+      "ivs": {},
+      "evs": {}
+    }
+  ]
+}

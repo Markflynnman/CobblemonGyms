@@ -1,0 +1,67 @@
+{
+  "name": "Erika",
+  "nameNPC": "erika",
+  "badge": "indigo_rainbow",
+  "modelType": "humanoid_slim",
+  "elementalType": "grass",
+  "battleRules": {
+    "maxItemUses": 2
+  },
+  "bag": [
+    {
+      "item": "cobblemon:hyper_potion",
+      "quantity": 1
+    },
+    {
+      "item": "cobblemon:full_heal",
+      "quantity": 1
+    }
+  ],
+  "team": [
+    {
+      "species": "victreebel",
+      "gender": "FEMALE",
+      "level": 29,
+      "nature": "bashful",
+      "ability": "chlorophyll",
+      "moveset": [
+        "stunspore",
+        "acid",
+        "poisonpowder",
+        "gigadrain"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "tangela",
+      "gender": "FEMALE",
+      "level": 24,
+      "nature": "bashful",
+      "ability": "chlorophyll",
+      "moveset": [
+        "poisonpowder",
+        "constrict",
+        "ingrain",
+        "gigadrain"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "vileplume",
+      "gender": "FEMALE",
+      "level": 29,
+      "nature": "bashful",
+      "ability": "chlorophyll",
+      "moveset": [
+        "sleeppowder",
+        "acid",
+        "stunspore",
+        "gigadrain"
+      ],
+      "ivs": {},
+      "evs": {}
+    }
+  ]
+}

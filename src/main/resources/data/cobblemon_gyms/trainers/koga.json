@@ -1,0 +1,82 @@
+{
+  "name": "Koga",
+  "nameNPC": "koga",
+  "badge": "indigo_soul",
+  "modelType": "humanoid",
+  "elementalType": "poison",
+  "battleRules": {
+    "maxItemUses": 3
+  },
+  "bag": [
+    {
+      "item": "cobblemon:hyper_potion",
+      "quantity": 2
+    },
+    {
+      "item": "cobblemon:full_heal",
+      "quantity": 1
+    }
+  ],
+  "team": [
+    {
+      "species": "koffing",
+      "gender": "MALE",
+      "level": 37,
+      "nature": "bashful",
+      "ability": "levitate",
+      "moveset": [
+        "selfdestruct",
+        "sludge",
+        "smokescreen",
+        "toxic"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "muk",
+      "gender": "MALE",
+      "level": 39,
+      "nature": "bashful",
+      "ability": "stickyhold",
+      "moveset": [
+        "minimize",
+        "sludge",
+        "acidarmor",
+        "toxic"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "koffing",
+      "gender": "MALE",
+      "level": 37,
+      "nature": "bashful",
+      "ability": "levitate",
+      "moveset": [
+        "selfdestruct",
+        "sludge",
+        "smokescreen",
+        "toxic"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "weezing",
+      "gender": "MALE",
+      "level": 43,
+      "nature": "bashful",
+      "ability": "levitate",
+      "moveset": [
+        "tackle",
+        "sludge",
+        "smokescreen",
+        "toxic"
+      ],
+      "ivs": {},
+      "evs": {}
+    }
+  ]
+}

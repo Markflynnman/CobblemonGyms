@@ -7,6 +7,7 @@ import net.neoforged.neoforge.common.util.INBTSerializable;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class PlayerBadgeCollection implements INBTSerializable<CompoundTag> {
     public static List<String> AllBadges = Arrays.asList(

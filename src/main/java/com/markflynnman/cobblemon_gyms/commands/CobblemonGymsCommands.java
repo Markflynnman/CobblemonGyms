@@ -1,7 +1,14 @@
 package com.markflynnman.cobblemon_gyms.commands;
 
+import com.cobblemon.mod.common.Cobblemon;
 import com.cobblemon.mod.common.api.pokemon.PokemonProperties;
+import com.cobblemon.mod.common.api.storage.player.GeneralPlayerData;
+import com.cobblemon.mod.common.api.storage.player.PlayerInstancedDataStoreTypes;
+import com.cobblemon.mod.common.api.types.ElementalType;
+import com.cobblemon.mod.common.api.types.ElementalTypes;
 import com.cobblemon.mod.common.command.argument.PokemonPropertiesArgumentType;
+import com.cobblemon.mod.common.net.messages.client.starter.OpenStarterUIPacket;
+import com.markflynnman.cobblemon_gyms.CobblemonGyms;
 import com.markflynnman.cobblemon_gyms.Config;
 import com.markflynnman.cobblemon_gyms.data_attachments.Attachments;
 import com.markflynnman.cobblemon_gyms.data_attachments.PlayerBadgeCollection;
@@ -9,18 +16,24 @@ import com.markflynnman.cobblemon_gyms.data_attachments.PlayerStarterPokemon;
 import com.markflynnman.cobblemon_gyms.menus.CobblemonGymsMenu;
 import com.markflynnman.cobblemon_gyms.network.CBadgeCollectionDataSyncPacket;
 import com.markflynnman.cobblemon_gyms.network.PacketHandler;
+import com.markflynnman.cobblemon_gyms.worldgen.dimension.GymDimension;
+import com.markflynnman.cobblemon_gyms.worldgen.feature.GymArenaFeatures;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.SimpleMenuProvider;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.slf4j.Logger;
+
+import java.awt.*;
 
 public class CobblemonGymsCommands {
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -53,7 +66,11 @@ public class CobblemonGymsCommands {
             return p.hasPermission(Config.getStarterSetCommand());
         }).executes((command) -> {
             return SetStarter(command.getSource(), EntityArgument.getPlayer(command, "player"), PokemonPropertiesArgumentType.Companion.getPokemonProperties(command, "pokemon"));
-        }))))).then(Commands.literal("command").then(Commands.literal("set").then(Commands.argument("gym", StringArgumentType.word()).suggests(new CobblemonGymsSuggestionProvider())
+        }))).then(Commands.literal("start").requires((p) -> {
+            return p.hasPermission(3);
+        }).executes((command) -> {
+            return CobblemonGymsStart(command.getSource(), EntityArgument.getPlayer(command, "player"));
+        })))).then(Commands.literal("command").then(Commands.literal("set").then(Commands.argument("gym", StringArgumentType.word()).suggests(new CobblemonGymsSuggestionProvider())
         .then(Commands.argument("command", StringArgumentType.greedyString()).requires((p) -> {
             return p.hasPermission(Config.getGymCommandsSetCommand());
         }).executes((command) -> {
@@ -64,6 +81,67 @@ public class CobblemonGymsCommands {
             return GetGymCommand(command.getSource(), StringArgumentType.getString(command, "gym"));
         })))));
 
+        dispatcher.register(Commands.literal("GymHub").requires((p) -> {
+            return p.hasPermission(0);
+        }).executes((command) -> {
+            if (command.getSource().getPlayer() != null) {
+                return cobblemonGymsHub(command.getSource(), command.getSource().getPlayer());
+            } else { return -1; }
+        }).then((Commands.literal("place").then((Commands.argument("type", StringArgumentType.word()).suggests(new CobblemonGymsTypeSuggestionProvider()).requires((p) -> {
+            return p.hasPermission(3);
+        }).executes((command) -> {
+            if (command.getSource().getPlayer() != null) {
+                return placeGym(command.getSource(), command.getSource().getPlayer(), StringArgumentType.getString(command, "type"));
+            } else { return -1; }
+        }).then(Commands.argument("x", IntegerArgumentType.integer()).then(Commands.argument("y", IntegerArgumentType.integer()).then(Commands.argument("z", IntegerArgumentType.integer()).requires((p) -> {
+            return p.hasPermission(3);
+        }).executes((command) -> {
+            return placeGym(command.getSource(), command.getSource().getPlayer(), StringArgumentType.getString(command, "type"), IntegerArgumentType.getInteger(command, "x"), IntegerArgumentType.getInteger(command, "y"), IntegerArgumentType.getInteger(command, "z"));
+        })))))))));
+
+    }
+
+    private int cobblemonGymsHub(CommandSourceStack source, ServerPlayer pPlayer) throws CommandSyntaxException {
+        String player_name = pPlayer.getName().toString().replace("literal{", "").replace("}", "");
+
+        if (source.getLevel() != source.getServer().getLevel(GymDimension.COBBLEMON_GYMS_LEVEL_KEY)) {
+            GymDimension.toDimension(source.getServer(), pPlayer);
+            source.sendSuccess(() -> {
+                return Component.literal("Teleporting " + player_name + " to the Gym Dimension");
+            }, true);
+        }
+        else {
+            GymDimension.fromDimension(source.getServer(), pPlayer);
+            source.sendSuccess(() -> {
+                return Component.literal("Teleporting " + player_name + " out of the Gym Dimension");
+            }, true);
+        }
+
+        return 1;
+    }
+
+    private int placeGym(CommandSourceStack source, ServerPlayer pPlayer, String type) throws CommandSyntaxException {
+        BlockPos pos = new BlockPos((int)pPlayer.position().x, (int)pPlayer.position().y, (int)pPlayer.position().z);
+        pos.below();
+
+        source.sendSuccess(() -> {
+            return Component.literal("Placing " + type + " gym at: " + pos);
+        }, true);
+
+        return  placeGym(source, pPlayer, type, pos.below());
+    }
+
+    private int placeGym(CommandSourceStack source, ServerPlayer pPlayer, String type, int x, int y, int z) throws CommandSyntaxException {
+        source.sendSuccess(() -> {
+            return Component.literal("Placing " + type + " gym at: " + x + " " + y + " " + z);
+        }, true);
+
+        return placeGym(source, pPlayer, type, new BlockPos(x, y, z));
+    }
+
+    private int placeGym(CommandSourceStack source, ServerPlayer pPlayer, String type, BlockPos pos) throws CommandSyntaxException {
+        GymArenaFeatures.place(source.getLevel(), pos, false, false, ElementalTypes.INSTANCE.get(type));
+        return 1;
     }
 
     private int cobblemonGymsGUI(CommandSourceStack source, ServerPlayer pPlayer) throws CommandSyntaxException {
@@ -138,6 +216,39 @@ public class CobblemonGymsCommands {
             starterPokemon.setStarterPokemon(pPokemon.create());
             source.sendSuccess(() -> {
                 return Component.literal("Set " + player_name + "'s starter pokemon to: " + starterPokemon.getStarterPokemon() + ", Type: " + starterPokemon.getStarterPokemonType() + ", Dex number: " + starterPokemon.getStarterPokemonDex());
+            }, true);
+        }
+
+        return 1;
+    }
+
+    private int CobblemonGymsStart(CommandSourceStack source, ServerPlayer pPlayer) {
+        // Start selection
+        GeneralPlayerData playerData = Cobblemon.playerDataManager.getGenericData(pPlayer);
+        String player_name = pPlayer.getName().toString().replace("literal{", "").replace("}", "");
+
+        if (!playerData.getStarterSelected()) {
+            if (playerData.getStarterLocked()) {
+                playerData.setStarterLocked(false);
+                playerData.sendToPlayer(pPlayer);
+            }
+            playerData.setStarterPrompted(true);
+            Cobblemon.playerDataManager.saveSingle(playerData, PlayerInstancedDataStoreTypes.INSTANCE.getGENERAL());
+
+            PacketDistributor.sendToPlayer(pPlayer, new OpenStarterUIPacket(Cobblemon.INSTANCE.getStarterHandler().getStarterList(pPlayer)));
+            source.sendSuccess(() -> {
+                return Component.literal("Opened starter selection screen for " + player_name + ".");
+            }, true);
+        } else if (!pPlayer.getData(Attachments.PLAYER_WARP_HISTORY).getSpawned()) {
+            GymDimension.randomSpawn(source.getServer(), pPlayer);
+            pPlayer.getData(Attachments.PLAYER_WARP_HISTORY).setSpawned(true);
+            source.sendSuccess(() -> {
+                return Component.literal("Teleporting " + player_name + " out of the Gym Dimension to a random location.");
+            }, true);
+        } else {
+            GymDimension.fromDimension(source.getServer(), pPlayer);
+            source.sendSuccess(() -> {
+                return Component.literal("Teleporting " + player_name + " out of the Gym Dimension.");
             }, true);
         }
 

@@ -1,0 +1,67 @@
+{
+  "name": "Lt. Surge",
+  "nameNPC": "lt_surge",
+  "badge": "indigo_thunder",
+  "modelType": "humanoid",
+  "elementalType": "electric",
+  "battleRules": {
+    "maxItemUses": 2
+  },
+  "bag": [
+    {
+      "item": "cobblemon:super_potion",
+      "quantity": 1
+    },
+    {
+      "item": "cobblemon:full_heal",
+      "quantity": 1
+    }
+  ],
+  "team": [
+    {
+      "species": "voltorb",
+      "gender": "GENDERLESS",
+      "level": 21,
+      "nature": "bashful",
+      "ability": "soundproof",
+      "moveset": [
+        "shockwave",
+        "tackle",
+        "screech",
+        "sonicboom"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "pikachu",
+      "gender": "MALE",
+      "level": 18,
+      "nature": "bashful",
+      "ability": "static",
+      "moveset": [
+        "shockwave",
+        "thunderwave",
+        "quickattack",
+        "doubleteam"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "raichu",
+      "gender": "MALE",
+      "level": 24,
+      "nature": "bashful",
+      "ability": "static",
+      "moveset": [
+        "shockwave",
+        "thunderwave",
+        "quickattack",
+        "doubleteam"
+      ],
+      "ivs": {},
+      "evs": {}
+    }
+  ]
+}

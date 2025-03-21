@@ -47,17 +47,4 @@ public class PlayerStarterPokemon implements INBTSerializable<CompoundTag> {
         starterPokemonType = nbt.getString("type");
         starterPokemonDex = nbt.getInt("dex");
     }
-
-    // Remove
-    public void saveNBTData(CompoundTag nbt) {
-        nbt.putString("name", starterPokemon);
-        nbt.putString("type", starterPokemonType);
-        nbt.putInt("dex", starterPokemonDex);
-    }
-
-    public void loadNBTData(CompoundTag nbt) {
-        starterPokemon = nbt.getString("name");
-        starterPokemonType = nbt.getString("type");
-        starterPokemonDex = nbt.getInt("dex");
-    }
 }

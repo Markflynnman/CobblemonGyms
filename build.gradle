@@ -173,6 +173,13 @@ dependencies {
     implementation("maven.modrinth:architectury-api:${architectury_api_version}")
     implementation("maven.modrinth:rctapi:${rctapi_version}")
     implementation("maven.modrinth:tbcs:${tbcs_version}")
+
+    implementation("maven.modrinth:athena-ctm:4.0.1")
+    implementation("maven.modrinth:resourceful-lib:3.0.11")
+    implementation("maven.modrinth:chipped:4.0.2")
+
+    runtimeOnly("curse.maven:easy-npc-559312:${easynpc}")
+    runtimeOnly("maven.modrinth:cobblemon-integrations:${cobblemon_integrations}-neoforge")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

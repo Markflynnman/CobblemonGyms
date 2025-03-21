@@ -121,8 +121,8 @@ public class Config {
         builder.push("Commands");
         builder.comment("\"/GymGUI\" command (Default: 3)");
         gymGUICommand = builder.defineInRange("gym_gui_command", 3, 0, 4);
-        builder.comment("\"/GymGUI {player}\" command (Default: 4)");
-        gymGUICommandOther = builder.defineInRange("gym_gui_command_other", 4, 0, 4);
+        builder.comment("\"/GymGUI {player}\" command (Default: 3)");
+        gymGUICommandOther = builder.defineInRange("gym_gui_command_other", 3, 0, 4);
         builder.comment("\"/badges\" command (Default: 0)");
         badgesCommand = builder.defineInRange("badges_command", 0, 0, 4);
         builder.comment("\"/badges {player}\" command (Default: 0)");

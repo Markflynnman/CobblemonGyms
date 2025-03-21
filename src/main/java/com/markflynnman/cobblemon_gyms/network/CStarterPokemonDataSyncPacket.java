@@ -31,11 +31,9 @@ public record CStarterPokemonDataSyncPacket(String starterPokemon, String starte
         return TYPE;
     }
 
-    private static final Logger LOGGER = LogUtils.getLogger();
     public static void handle(final CStarterPokemonDataSyncPacket packet, final IPayloadContext context) {
         context.enqueueWork(() -> {
             // ON CLIENT
-            LOGGER.info("c_starter_pokemon_data_sync_packet received.");
             ClientStarterPokemonData.set(packet.starterPokemon, packet.starterPokemonType, packet.starterPokemonDex);
         });
     }

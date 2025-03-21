@@ -1,7 +1,6 @@
 # CobblemonGyms
 CobblemonGyms was made for my [Cobblemon modpack and server](https://github.com/Markflynnman/CobblemonPack).  
-This mod requires [Cobblemon](https://gitlab.com/cable-mc/cobblemon)  
-It was made to be used with [KubeJS](https://github.com/KubeJS-Mods/KubeJS), [Radical Cobblemon Trainers API](https://gitlab.com/srcmc/rct/api), and [Easy NPC](https://github.com/MarkusBordihn/BOs-Easy-NPC), but they are not required.
+This mod requires [Cobblemon](https://gitlab.com/cable-mc/cobblemon), [Radical Cobblemon Trainers API](https://gitlab.com/srcmc/rct/api), and [Easy NPC](https://github.com/MarkusBordihn/BOs-Easy-NPC)
 
 ### CobblemonGyms adds:
 - Gym Badges

@@ -126,6 +126,17 @@ public class PlayerBadgeCollection implements INBTSerializable<CompoundTag> {
         return true;
     }
 
+    public boolean hasBadge(String badge) {
+        int index = AllBadges.indexOf(badge);
+
+        if (Array.get(badgeCollection, index).equals(1)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public boolean removeBadge(int index) {
         try {
             Array.set(badgeCollection, index, 0);

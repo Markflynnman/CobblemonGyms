@@ -97,7 +97,7 @@ public class GymHandler {
         ParseResults<CommandSourceStack> results = commanddispatcher.parse(command, commandSourceStack);
         player.getServer().getCommands().performCommand(results, command);
 
-        player.sendSystemMessage(Component.literal(command));
+//        player.sendSystemMessage(Component.literal(command));
 
         GymArenaFeatures.place(level, gymArena.getGymLocation(), false, true, gymLeader.getType());
         player.teleportTo(level.getLevel(), gymArena.getGymLocation().getX()+23.5, gymArena.getGymLocation().getY()+2, gymArena.getGymLocation().getZ()+32.5, 180, 0);
@@ -105,6 +105,11 @@ public class GymHandler {
         RCTApi.getInstance(CobblemonGyms.MODID).getTrainerRegistry().getById(gymLeader.getTrainerID(), TrainerNPC.class).setEntity(trainer);
         RCTApi.getInstance(CobblemonGyms.MODID).getBattleManager().startSingle(CobblemonGyms.RCT.getTrainerRegistry().getById(player.getName().getString()), gymLeaders.get(badge).getTrainer(), new BattleRules());
         trainer.remove(Entity.RemovalReason.DISCARDED);
+
+        // TODO Fix this
+//        gymArena.setBattleInProgress(true);
+        nextGymID++;
+
         return true;
     }
 

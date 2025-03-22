@@ -41,8 +41,10 @@ public class GymBattleHandler {
             uuids.forEach((uuid) -> {
                 ServerPlayer player = server.getPlayerList().getPlayer(uuid);
                 if (player != null) {
-                    player.getInventory().add(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(CobblemonGyms.MODID, battleMap.get(uuid).getBadgePath()))));
-                    player.getData(Attachments.PLAYER_BADGE_COLLECTION).addBadge(battleMap.get(uuid).getBadge());
+                    if (!player.getData(Attachments.PLAYER_BADGE_COLLECTION).hasBadge(battleMap.get(uuid).getBadge())) {
+                        player.getInventory().add(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(CobblemonGyms.MODID, battleMap.get(uuid).getBadgePath()))));
+                        player.getData(Attachments.PLAYER_BADGE_COLLECTION).addBadge(battleMap.get(uuid).getBadge());
+                    }
                     player.teleportTo(server.getLevel(GymDimension.COBBLEMON_GYMS_LEVEL_KEY), 0, 71, 0, 180, 0);
                     Cobblemon.INSTANCE.getStorage().getParty(player).heal();
                     removeBattle(uuid);

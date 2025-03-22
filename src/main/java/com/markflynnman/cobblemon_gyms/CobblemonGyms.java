@@ -116,7 +116,9 @@ public class CobblemonGyms
     }
 
     public Unit onBattleVictory(BattleVictoryEvent event) {
-        GymBattleHandler.getINSTANCE().battleEnd(event.getWinners(), event.getLosers());
+        if (event.getBattle().isPvN()) {
+            GymBattleHandler.getINSTANCE().battleEnd(event.getWinners(), event.getLosers());
+        }
 
         return Unit.INSTANCE;
     }

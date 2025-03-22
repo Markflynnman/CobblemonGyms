@@ -1,7 +1,5 @@
 package com.markflynnman.cobblemon_gyms.gym_systems;
 
-import com.cobblemon.mod.common.api.battles.model.PokemonBattle;
-import com.cobblemon.mod.common.api.battles.model.actor.BattleActor;
 import com.cobblemon.mod.common.api.types.ElementalTypes;
 import com.gitlab.srcmc.rctapi.api.RCTApi;
 import com.gitlab.srcmc.rctapi.api.battle.BattleRules;
@@ -38,21 +36,21 @@ public class GymHandler {
     public static List<GymArena> gymArenas = new ArrayList<GymArena>();
     public static Map<String, GymLeader> gymLeaders = new HashMap<>();
     public static int nextGymID = 0;
-    public static final UUID professorOakUUID = UUID.randomUUID();
-    public static final UUID gymAttendantUUID = UUID.randomUUID();
+    public static UUID professorOakUUID;
+    public static UUID gymAttendantUUID;
 
-    public static void initHubNPCs(ServerPlayer player) {
-        // Spawn Professor Oak if not spawned already
-        String command = "execute in cobblemon_gyms:gym_dimension unless entity " + professorOakUUID + " run easy_npc preset import data cobblemon_gyms:preset/humanoid/professor_oak.npc.nbt 0.5 71 8.5 " + professorOakUUID;
-        CommandSourceStack commandSourceStack = player.createCommandSourceStack().withSuppressedOutput().withPermission(4);
-        CommandDispatcher<CommandSourceStack> commanddispatcher = player.getServer().getCommands().getDispatcher();
+    public static void initHubNPCs(MinecraftServer server) {
+        // Spawn Professor Oak
+        String command = "execute in cobblemon_gyms:gym_dimension run easy_npc preset import data cobblemon_gyms:preset/humanoid/professor_oak.npc.nbt 0.5 71 8.5 " + professorOakUUID;
+        CommandSourceStack commandSourceStack = server.createCommandSourceStack().withSuppressedOutput().withPermission(4);
+        CommandDispatcher<CommandSourceStack> commanddispatcher = server.getCommands().getDispatcher();
         ParseResults<CommandSourceStack> results = commanddispatcher.parse(command, commandSourceStack);
-        player.getServer().getCommands().performCommand(results, command);
+        server.getCommands().performCommand(results, command);
 
-        // Spawn Gym Attendant if not spawned already
-        command = "execute in cobblemon_gyms:gym_dimension unless entity " + gymAttendantUUID + " run easy_npc preset import data cobblemon_gyms:preset/humanoid_slim/gym_attendant.npc.nbt 0.5 71 -7.5 " + gymAttendantUUID;
+        // Spawn Gym Attendant
+        command = "execute in cobblemon_gyms:gym_dimension run easy_npc preset import data cobblemon_gyms:preset/humanoid_slim/gym_attendant.npc.nbt 0.5 71 -7.5 " + gymAttendantUUID;
         results = commanddispatcher.parse(command, commandSourceStack);
-        player.getServer().getCommands().performCommand(results, command);
+        server.getCommands().performCommand(results, command);
     }
 
     public static void initGyms(ServerLevelAccessor level) {
@@ -60,6 +58,14 @@ public class GymHandler {
             GymArenaFeatures.place(level, gymLocation, false, false, ElementalTypes.INSTANCE.get("normal"));
             gymArenas.add(new GymArena(gymLocation, false, UUID.randomUUID()));
         }
+    }
+
+    public static void setProfessorOakUUID(UUID uuid) {
+        professorOakUUID = uuid;
+    }
+
+    public static void setGymAttendantUUID(UUID uuid) {
+        gymAttendantUUID = uuid;
     }
 
     public static void addLeader(String badge, GymLeader gymLeader) {
@@ -113,7 +119,6 @@ public class GymHandler {
         return true;
     }
 
-    // TODO Fix NPCs not getting removed
     public static void cleanNPCS(MinecraftServer server) {
         for (GymArena gymArena: gymArenas) {
             // Delete EasyNPC
@@ -123,5 +128,16 @@ public class GymHandler {
             ParseResults<CommandSourceStack> results = commanddispatcher.parse(command, commandSourceStack);
             server.getCommands().performCommand(results, command);
         }
+
+        // Delete Professor Oak and Gym Attendant
+        String command = "easy_npc delete " + professorOakUUID;
+        CommandSourceStack commandSourceStack = server.createCommandSourceStack().withSuppressedOutput().withPermission(4);
+        CommandDispatcher<CommandSourceStack> commanddispatcher = server.getCommands().getDispatcher();
+        ParseResults<CommandSourceStack> results = commanddispatcher.parse(command, commandSourceStack);
+        server.getCommands().performCommand(results, command);
+
+        command = "easy_npc delete " + professorOakUUID;
+        results = commanddispatcher.parse(command, commandSourceStack);
+        server.getCommands().performCommand(results, command);
     }
 }

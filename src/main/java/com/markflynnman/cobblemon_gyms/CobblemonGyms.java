@@ -139,6 +139,9 @@ public class CobblemonGyms
             GymBattleHandler.getINSTANCE().setServer(server);
 
             GymHandler.initGyms(server.getLevel(GymDimension.COBBLEMON_GYMS_LEVEL_KEY));
+            GymHandler.setGymAttendantUUID(UUID.randomUUID());
+            GymHandler.setProfessorOakUUID(UUID.randomUUID());
+            GymHandler.initHubNPCs(server);
 
             TrainerRegistry trainerRegistry = RCT.getTrainerRegistry();
             trainerRegistry.init(server);
@@ -192,7 +195,6 @@ public class CobblemonGyms
             if (event.getEntity() instanceof ServerPlayer serverPlayer) {
                 if (!serverPlayer.getData(Attachments.PLAYER_WARP_HISTORY).getSpawned()) {
                     GymDimension.firstSpawn(serverPlayer.server, serverPlayer);
-                    GymHandler.initHubNPCs(serverPlayer);
                 }
             }
         }

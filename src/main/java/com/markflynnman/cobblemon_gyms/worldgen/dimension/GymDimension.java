@@ -105,6 +105,7 @@ public class GymDimension {
         }
         GymHubFeature.place(level, blockPos, false);
         GymHandler.initGyms(level);
+        GymHandler.initHubNPCs(server);
     }
 
     public static void fromDimension(MinecraftServer server, ServerPlayer player) {

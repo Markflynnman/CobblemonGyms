@@ -2,6 +2,7 @@
   "name": "Koga",
   "nameNPC": "koga",
   "badge": "indigo_soul",
+  "badgePath": "soul_badge",
   "modelType": "humanoid",
   "elementalType": "poison",
   "battleRules": {

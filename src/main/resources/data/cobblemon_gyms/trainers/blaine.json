@@ -2,6 +2,7 @@
   "name": "Blaine",
   "nameNPC": "blaine",
   "badge": "indigo_volcano",
+  "badgePath": "volcano_badge",
   "modelType": "humanoid",
   "elementalType": "fire",
   "battleRules": {

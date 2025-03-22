@@ -2,6 +2,7 @@
   "name": "Sabrina",
   "nameNPC": "sabrina",
   "badge": "indigo_marsh",
+  "badgePath": "marsh_badge",
   "modelType": "humanoid_slim",
   "elementalType": "psychic",
   "battleRules": {

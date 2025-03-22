@@ -1,5 +1,7 @@
 package com.markflynnman.cobblemon_gyms.gym_systems;
 
+import com.cobblemon.mod.common.api.battles.model.PokemonBattle;
+import com.cobblemon.mod.common.api.battles.model.actor.BattleActor;
 import com.cobblemon.mod.common.api.types.ElementalTypes;
 import com.gitlab.srcmc.rctapi.api.RCTApi;
 import com.gitlab.srcmc.rctapi.api.battle.BattleRules;
@@ -85,7 +87,9 @@ public class GymHandler {
         }
         BlockPos trainerSpawn = new BlockPos(gymArena.getGymLocation().getX()+23, gymArena.getGymLocation().getY()+2, gymArena.getGymLocation().getZ()+14);
         GymLeader gymLeader = gymLeaders.get(badge);
+        GymBattleHandler.getINSTANCE().addBattle(player.getUUID(), gymLeader);
 
+        // TODO Fix NPCs spawning when they already exist
         // Spawn EasyNPC
         String command = "easy_npc preset import data cobblemon_gyms:preset/"+gymLeader.getModelType()+"/"+gymLeader.getNameNPC()+".npc.nbt "+trainerSpawn.getX()+" "+trainerSpawn.getY()+" "+trainerSpawn.getZ()+" "+gymArena.getTrainerUUID();
         CommandSourceStack commandSourceStack = player.createCommandSourceStack().withSuppressedOutput().withPermission(4);
@@ -104,6 +108,7 @@ public class GymHandler {
         return true;
     }
 
+    // TODO Fix NPCs not getting removed
     public static void cleanNPCS(MinecraftServer server) {
         for (GymArena gymArena: gymArenas) {
             // Delete EasyNPC

@@ -2,6 +2,7 @@
   "name": "Misty",
   "nameNPC": "misty",
   "badge": "indigo_cascade",
+  "badgePath": "cascade_badge",
   "modelType": "humanoid_slim",
   "elementalType": "water",
   "battleRules": {

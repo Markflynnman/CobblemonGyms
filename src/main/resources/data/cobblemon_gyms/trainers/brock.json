@@ -2,6 +2,7 @@
   "name": "Brock",
   "nameNPC": "brock",
   "badge": "indigo_boulder",
+  "badgePath": "boulder_badge",
   "modelType": "humanoid",
   "elementalType": "rock",
   "team": [

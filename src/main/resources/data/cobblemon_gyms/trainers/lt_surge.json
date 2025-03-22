@@ -2,6 +2,7 @@
   "name": "Lt. Surge",
   "nameNPC": "lt_surge",
   "badge": "indigo_thunder",
+  "badgePath": "thunder_badge",
   "modelType": "humanoid",
   "elementalType": "electric",
   "battleRules": {

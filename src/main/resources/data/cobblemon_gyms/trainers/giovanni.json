@@ -2,6 +2,7 @@
   "name": "Giovanni",
   "nameNPC": "giovanni",
   "badge": "indigo_earth",
+  "badgePath": "earth_badge",
   "modelType": "humanoid",
   "elementalType": "ground",
   "battleRules": {

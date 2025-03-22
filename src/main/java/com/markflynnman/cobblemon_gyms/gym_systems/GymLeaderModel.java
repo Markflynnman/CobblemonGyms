@@ -5,14 +5,16 @@ import org.jetbrains.annotations.NotNull;
 public class GymLeaderModel {
     private String name;
     private String badge;
+    private String badgePath;
     private String nameNPC;
     private String modelType;
     private String elementalType;
 
 
-    public GymLeaderModel(@NotNull String name,@NotNull String badge, @NotNull String nameNPC, @NotNull String modelType, @NotNull String elementalType) {
+    public GymLeaderModel(@NotNull String name, @NotNull String badge, @NotNull String badgePath, @NotNull String nameNPC, @NotNull String modelType, @NotNull String elementalType) {
         this.name = name;
         this.badge = badge;
+        this.badgePath = badgePath;
         this.nameNPC = nameNPC;
         this.modelType = modelType;
         this.elementalType = elementalType;
@@ -25,6 +27,8 @@ public class GymLeaderModel {
     public String getBadge() {
         return badge;
     }
+
+    public String getBadgePath() { return badgePath; }
 
     public String getNameNPC() {
         return nameNPC;

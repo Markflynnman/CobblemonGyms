@@ -2,6 +2,7 @@
   "name": "Erika",
   "nameNPC": "erika",
   "badge": "indigo_rainbow",
+  "badgePath": "rainbow_badge",
   "modelType": "humanoid_slim",
   "elementalType": "grass",
   "battleRules": {

@@ -1,9 +1,13 @@
 package com.markflynnman.cobblemon_gyms;
 
 import com.cobblemon.mod.common.api.Priority;
+import com.cobblemon.mod.common.api.battles.model.PokemonBattle;
+import com.cobblemon.mod.common.api.battles.model.actor.BattleActor;
 import com.cobblemon.mod.common.api.events.CobblemonEvents;
+import com.cobblemon.mod.common.api.events.battles.BattleVictoryEvent;
 import com.cobblemon.mod.common.api.events.starter.StarterChosenEvent;
 import com.cobblemon.mod.common.api.types.ElementalTypes;
+import com.cobblemon.mod.common.battles.actor.PlayerBattleActor;
 import com.cobblemon.mod.common.platform.events.ServerEvent;
 import com.gitlab.srcmc.rctapi.api.RCTApi;
 import com.gitlab.srcmc.rctapi.api.models.TrainerModel;
@@ -14,6 +18,7 @@ import com.google.gson.JsonObject;
 import com.markflynnman.cobblemon_gyms.data_attachments.*;
 import com.markflynnman.cobblemon_gyms.commands.BadgeCollectionCommands;
 import com.markflynnman.cobblemon_gyms.commands.CobblemonGymsCommands;
+import com.markflynnman.cobblemon_gyms.gym_systems.GymBattleHandler;
 import com.markflynnman.cobblemon_gyms.gym_systems.GymHandler;
 import com.markflynnman.cobblemon_gyms.gym_systems.GymLeader;
 import com.markflynnman.cobblemon_gyms.gym_systems.GymLeaderModel;
@@ -25,6 +30,7 @@ import com.markflynnman.cobblemon_gyms.network.CStarterPokemonDataSyncPacket;
 import com.markflynnman.cobblemon_gyms.network.PacketHandler;
 import com.markflynnman.cobblemon_gyms.worldgen.dimension.GymDimension;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -59,6 +65,7 @@ public class CobblemonGyms
     public static final String MODID = "cobblemon_gyms";
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final RCTApi RCT = RCTApi.getInstance(MODID);
+    private static MinecraftServer server;
 
     private static final Gson GSON = new GsonBuilder()
             .setPrettyPrinting()
@@ -75,7 +82,6 @@ public class CobblemonGyms
 
     public CobblemonGyms(IEventBus modEventBus, ModContainer modContainer)
     {
-
         ModCreativeModTabs.register(modEventBus);
         ModMenuTypes.register(modEventBus);
         GymBadges.register(modEventBus);
@@ -94,6 +100,7 @@ public class CobblemonGyms
             LOGGER.info(MODID + ": Cobblemon loaded.");
 
             CobblemonEvents.STARTER_CHOSEN.subscribe(Priority.NORMAL, this::onStarterChosenEvent);
+            CobblemonEvents.BATTLE_VICTORY.subscribe(Priority.NORMAL, this::onBattleVictory);
         }
         else {
             LOGGER.info(MODID + ": Cobblemon not loaded.");
@@ -104,6 +111,12 @@ public class CobblemonGyms
         LOGGER.warn(String.valueOf(event.getPokemon().getSpecies()) + " : " + String.valueOf(event.getPokemon().getPrimaryType().getName()) + " : " + event.getPokemon().getSpecies().getNationalPokedexNumber());
 
         event.getPlayer().getData(Attachments.PLAYER_STARTER_POKEMON.get()).setStarterPokemon(event.getPokemon());
+
+        return Unit.INSTANCE;
+    }
+
+    public Unit onBattleVictory(BattleVictoryEvent event) {
+        GymBattleHandler.getINSTANCE().battleEnd(event.getWinners(), event.getLosers());
 
         return Unit.INSTANCE;
     }
@@ -121,13 +134,14 @@ public class CobblemonGyms
         @SubscribeEvent
         public static void onServerStarting(ServerStartingEvent event) {
             MinecraftServer server = event.getServer();
+            GymBattleHandler.getINSTANCE().setServer(server);
 
             GymHandler.initGyms(server.getLevel(GymDimension.COBBLEMON_GYMS_LEVEL_KEY));
 
             TrainerRegistry trainerRegistry = RCT.getTrainerRegistry();
             trainerRegistry.init(server);
 
-            // Trying to load trainers folder in data
+            // Loading trainers
             ResourceManager resourceManager = server.getResourceManager();
             resourceManager.listPacks()
                     .filter(pack -> pack.getNamespaces(PackType.SERVER_DATA).contains(MODID))
@@ -155,6 +169,8 @@ public class CobblemonGyms
                 GymHandler.addLeader(gymLeaderModel.getBadge(), new GymLeader(
                         gymLeaderModel.getName(),
                         gymLeaderModel.getNameNPC(),
+                        gymLeaderModel.getBadge(),
+                        gymLeaderModel.getBadgePath(),
                         gymLeaderModel.getModelType(),
                         ElementalTypes.INSTANCE.get(gymLeaderModel.getElementalType()),
                         trainerRegistry.getById(trainerID),

@@ -1,0 +1,71 @@
+{
+  "name": "Morty",
+  "nameNPC": "morty",
+  "badge": "johto_fog",
+  "badgePath": "fog_badge",
+  "modelType": "humanoid",
+  "elementalType": "ghost",
+  "team": [
+    {
+      "species": "gastly",
+      "gender": "MALE",
+      "level": 21,
+      "nature": "bashful",
+      "ability": "levitate",
+      "moveset": [
+        "lick",
+        "spite",
+        "meanlook",
+        "curse"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "haunter",
+      "gender": "MALE",
+      "level": 21,
+      "nature": "bashful",
+      "ability": "levitate",
+      "moveset": [
+        "hypnosis",
+        "dreameater",
+        "curse",
+        "nightmare"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "gengar",
+      "gender": "MALE",
+      "level": 25,
+      "nature": "bashful",
+      "ability": "levitate",
+      "moveset": [
+        "hypnosis",
+        "shadowball",
+        "meanlook",
+        "suckerpunch"
+      ],
+      "ivs": {},
+      "evs": {},
+      "heldItem": "sitrus_berry"
+    },
+    {
+      "species": "haunter",
+      "gender": "MALE",
+      "level": 23,
+      "nature": "bashful",
+      "ability": "levitate",
+      "moveset": [
+        "curse",
+        "meanlook",
+        "suckerpunch",
+        "nightshade"
+      ],
+      "ivs": {},
+      "evs": {}
+    }
+  ]
+}

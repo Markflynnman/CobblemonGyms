@@ -1,0 +1,37 @@
+{
+  "name": "Falkner",
+  "nameNPC": "falkner",
+  "badge": "johto_zephyr",
+  "badgePath": "zephyr_badge",
+  "modelType": "humanoid",
+  "elementalType": "flying",
+  "team": [
+    {
+      "species": "pidgey",
+      "gender": "MALE",
+      "level": 9,
+      "nature": "bashful",
+      "ability": "keeneye",
+      "moveset": [
+        "tackle",
+        "sandattack"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "pidgeotto",
+      "gender": "MALE",
+      "level": 13,
+      "nature": "bashful",
+      "ability": "keeneye",
+      "moveset": [
+        "tackle",
+        "roost",
+        "gust"
+      ],
+      "ivs": {},
+      "evs": {}
+    }
+  ]
+}

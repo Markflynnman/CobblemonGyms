@@ -1,0 +1,71 @@
+{
+  "name": "Clair",
+  "nameNPC": "clair",
+  "badge": "johto_rising",
+  "badgePath": "rising_badge",
+  "modelType": "humanoid",
+  "elementalType": "dragon",
+  "team": [
+    {
+      "species": "gyarados",
+      "gender": "FEMALE",
+      "level": 38,
+      "nature": "bashful",
+      "ability": "intimidate",
+      "moveset": [
+        "bite",
+        "twister",
+        "dragonrage",
+        "dragonpulse"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "dragonair",
+      "gender": "FEMALE",
+      "level": 38,
+      "nature": "bashful",
+      "ability": "shedskin",
+      "moveset": [
+        "thunderwave",
+        "slam",
+        "aquatail",
+        "dragonpulse"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "dragonair",
+      "gender": "FEMALE",
+      "level": 38,
+      "nature": "bashful",
+      "ability": "shedskin",
+      "moveset": [
+        "thunderwave",
+        "slam",
+        "fireblast",
+        "dragonpulse"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "kingdra",
+      "gender": "FEMALE",
+      "level": 41,
+      "nature": "bashful",
+      "ability": "sniper",
+      "moveset": [
+        "hydropump",
+        "smokescreen",
+        "hyperbeam",
+        "dragonpulse"
+      ],
+      "ivs": {},
+      "evs": {},
+      "heldItem": "sitrus_berry"
+    }
+  ]
+}

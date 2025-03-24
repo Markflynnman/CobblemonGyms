@@ -14,9 +14,8 @@ public class GymLeader {
     private final ElementalType type;
     private final Trainer trainer;
     private final String trainerID;
-    private final UUID uuid;
 
-    public GymLeader(String name, String nameNPC, String badge, String badgePath, String modelType, ElementalType type, Trainer trainer, String trainerID, UUID uuid) {
+    public GymLeader(String name, String nameNPC, String badge, String badgePath, String modelType, ElementalType type, Trainer trainer, String trainerID) {
         this.name = name;
         this.nameNPC = nameNPC;
         this.badge = badge;
@@ -25,7 +24,6 @@ public class GymLeader {
         this.type = type;
         this.trainer = trainer;
         this.trainerID = trainerID;
-        this.uuid = uuid;
     }
 
     public String getName() {
@@ -54,9 +52,5 @@ public class GymLeader {
 
     public String getTrainerID() {
         return trainerID;
-    }
-
-    public UUID getUuid() {
-        return uuid;
     }
 }

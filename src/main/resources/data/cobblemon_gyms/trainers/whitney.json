@@ -1,0 +1,41 @@
+{
+  "name": "Whitney",
+  "nameNPC": "whitney",
+  "badge": "johto_plain",
+  "badgePath": "plain_badge",
+  "modelType": "humanoid",
+  "elementalType": "normal",
+  "team": [
+    {
+      "species": "clefairy",
+      "gender": "FEMALE",
+      "level": 17,
+      "nature": "bashful",
+      "ability": "cutecharm",
+      "moveset": [
+        "mimic",
+        "encore",
+        "doubleslap",
+        "metronome"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "miltank",
+      "gender": "FEMALE",
+      "level": 19,
+      "nature": "bashful",
+      "ability": "scrappy",
+      "moveset": [
+        "stomp",
+        "rollout",
+        "attract",
+        "milkdrink"
+      ],
+      "ivs": {},
+      "evs": {},
+      "heldItem": "lum_berry"
+    }
+  ]
+}

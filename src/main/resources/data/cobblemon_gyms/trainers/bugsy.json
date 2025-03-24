@@ -1,0 +1,49 @@
+{
+  "name": "Bugsy",
+  "nameNPC": "bugsy",
+  "badge": "johto_hive",
+  "badgePath": "hive_badge",
+  "modelType": "humanoid",
+  "elementalType": "bug",
+  "team": [
+    {
+      "species": "scyther",
+      "gender": "FEMALE",
+      "level": 17,
+      "nature": "bashful",
+      "ability": "technician",
+      "moveset": [
+        "uturn",
+        "quickattack",
+        "leer",
+        "focusenergy"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "metapod",
+      "gender": "FEMALE",
+      "level": 15,
+      "nature": "bashful",
+      "ability": "shedskin",
+      "moveset": [
+        "tackle"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "kakuna",
+      "gender": "FEMALE",
+      "level": 15,
+      "nature": "bashful",
+      "ability": "shedskin",
+      "moveset": [
+        "poisonsting"
+      ],
+      "ivs": {},
+      "evs": {}
+    }
+  ]
+}

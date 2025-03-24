@@ -10,14 +10,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
-import com.cobblemon.mod.common.util.*;
 
 import java.util.*;
 
 public class GymBattleHandler {
     private static final GymBattleHandler INSTANCE = new GymBattleHandler();
     private MinecraftServer server;
-    private Map<UUID, GymLeader> battleMap = new HashMap<>();
+    private Map<UUID, GymArena> battleMap = new HashMap<>();
 
     public static GymBattleHandler getINSTANCE() {
         return INSTANCE;
@@ -27,8 +26,8 @@ public class GymBattleHandler {
         this.server = server;
     }
 
-    public void addBattle(UUID playerUUID, GymLeader gymLeader) {
-        battleMap.put(playerUUID, gymLeader);
+    public void addBattle(UUID playerUUID, GymArena gymArena) {
+        battleMap.put(playerUUID, gymArena);
     }
 
     public void removeBattle(UUID playerUUID) {
@@ -40,13 +39,15 @@ public class GymBattleHandler {
             Iterable<UUID> uuids = winner.getPlayerUUIDs();
             uuids.forEach((uuid) -> {
                 ServerPlayer player = server.getPlayerList().getPlayer(uuid);
+                GymArena gymArena = battleMap.get(uuid);
                 if (player != null) {
-                    if (!player.getData(Attachments.PLAYER_BADGE_COLLECTION).hasBadge(battleMap.get(uuid).getBadge())) {
-                        player.getInventory().add(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(CobblemonGyms.MODID, battleMap.get(uuid).getBadgePath()))));
-                        player.getData(Attachments.PLAYER_BADGE_COLLECTION).addBadge(battleMap.get(uuid).getBadge());
+                    if (!player.getData(Attachments.PLAYER_BADGE_COLLECTION).hasBadge(gymArena.getGymLeader().getBadge())) {
+                        player.getInventory().add(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(CobblemonGyms.MODID, gymArena.getGymLeader().getBadgePath()))));
+                        player.getData(Attachments.PLAYER_BADGE_COLLECTION).addBadge(gymArena.getGymLeader().getBadge());
                     }
-                    player.teleportTo(server.getLevel(GymDimension.COBBLEMON_GYMS_LEVEL_KEY), 0, 71, 0, 180, 0);
+                    player.teleportTo(server.getLevel(GymDimension.COBBLEMON_GYMS_LEVEL_KEY), 0.5, 71, 0.5, 180, 0);
                     Cobblemon.INSTANCE.getStorage().getParty(player).heal();
+                    gymArena.setBattleInProgress(false);
                     removeBattle(uuid);
                 }
             });
@@ -57,8 +58,9 @@ public class GymBattleHandler {
             uuids.forEach((uuid) -> {
                 ServerPlayer player = server.getPlayerList().getPlayer(uuid);
                 if (player != null) {
-                    player.teleportTo(server.getLevel(GymDimension.COBBLEMON_GYMS_LEVEL_KEY), 0, 71, 0, 180, 0);
+                    player.teleportTo(server.getLevel(GymDimension.COBBLEMON_GYMS_LEVEL_KEY), 0.5, 71, 0.5, 180, 0);
                     Cobblemon.INSTANCE.getStorage().getParty(player).heal();
+                    battleMap.get(uuid).setBattleInProgress(false);
                     removeBattle(uuid);
                 }
             });

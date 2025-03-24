@@ -6,8 +6,9 @@ import java.util.UUID;
 
 public class GymArena {
     private final BlockPos gymLocation;
-    private Boolean battleInProgress;
     private final UUID trainerUUID;
+    private Boolean battleInProgress;
+    private GymLeader gymLeader;
 
     public GymArena(BlockPos gymLocation, Boolean battleInProgress, UUID trainerUUID) {
         this.gymLocation = gymLocation;
@@ -19,15 +20,17 @@ public class GymArena {
         return gymLocation;
     }
 
+    public UUID getTrainerUUID() { return trainerUUID; }
+
     public Boolean getBattleInProgress() {
         return battleInProgress;
     }
+
+    public GymLeader getGymLeader() { return gymLeader; }
 
     public void setBattleInProgress(Boolean battleInProgress) {
         this.battleInProgress = battleInProgress;
     }
 
-    public UUID getTrainerUUID() {
-        return trainerUUID;
-    }
+    public void setGymLeader(GymLeader gymLeader) { this.gymLeader = gymLeader; }
 }

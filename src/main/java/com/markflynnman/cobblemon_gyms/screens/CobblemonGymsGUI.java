@@ -58,7 +58,6 @@ public class CobblemonGymsGUI extends AbstractContainerScreen<CobblemonGymsMenu>
                 Component.literal("Indigo"),
                 false
         ));
-        // TODO Change pDisabled back to false when gyms are done
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
                 (width/2)+buttonPadding, (height/2)-(buttonHeight*2)-(buttonPadding*3),
@@ -70,8 +69,9 @@ public class CobblemonGymsGUI extends AbstractContainerScreen<CobblemonGymsMenu>
                 new ItemStack(GymBadges.ZEPHYR_BADGE.get()),
                 (width/2)+buttonPadding, (height/2)-(buttonHeight*2)-(buttonPadding*3), 4,
                 Component.literal("Johto"),
-                true
+                false
         ));
+        // TODO Change pDisabled back to false when gyms are done
         this.addRenderableWidget(new ItemButton(
                 TEXTURE,
                 (width/2)-buttonWidth-buttonPadding, (height/2)-buttonHeight-buttonPadding,

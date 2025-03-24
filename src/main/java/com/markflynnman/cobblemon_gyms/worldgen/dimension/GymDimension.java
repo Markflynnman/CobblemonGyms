@@ -104,7 +104,7 @@ public class GymDimension {
             player.setGameMode(GameType.ADVENTURE);
         }
         GymHubFeature.place(level, blockPos, false);
-        GymHandler.initGyms(level);
+        GymHandler.initGyms(level, server);
         GymHandler.initHubNPCs(server);
     }
 
@@ -130,7 +130,7 @@ public class GymDimension {
             player.setGameMode(GameType.ADVENTURE);
         }
         GymHubFeature.place(level, blockPos, false);
-        GymHandler.initGyms(level);
+        GymHandler.initGyms(level, server);
     }
 
     public static void randomSpawn(MinecraftServer server, ServerPlayer player) {

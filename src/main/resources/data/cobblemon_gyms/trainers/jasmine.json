@@ -1,0 +1,56 @@
+{
+  "name": "Jasmine",
+  "nameNPC": "jasmine",
+  "badge": "johto_mineral",
+  "badgePath": "mineral_badge",
+  "modelType": "humanoid",
+  "elementalType": "steel",
+  "team": [
+    {
+      "species": "magnemite",
+      "gender": "GENDERLESS",
+      "level": 30,
+      "nature": "bashful",
+      "ability": "magnetpull",
+      "moveset": [
+        "thunderbolt",
+        "sonicboom",
+        "supersonic",
+        "thunderwave"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "magnemite",
+      "gender": "GENDERLESS",
+      "level": 30,
+      "nature": "bashful",
+      "ability": "magnetpull",
+      "moveset": [
+        "thunderbolt",
+        "sonicboom",
+        "supersonic",
+        "thunderwave"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "steelix",
+      "gender": "FEMALE",
+      "level": 35,
+      "nature": "bashful",
+      "ability": "sturdy",
+      "moveset": [
+        "irontail",
+        "rockthrow",
+        "sandstorm",
+        "screech"
+      ],
+      "ivs": {},
+      "evs": {},
+      "heldItem": "sitrus_berry"
+    }
+  ]
+}

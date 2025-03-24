@@ -1,0 +1,41 @@
+{
+  "name": "Chuck",
+  "nameNPC": "chuck",
+  "badge": "johto_storm",
+  "badgePath": "storm_badge",
+  "modelType": "humanoid",
+  "elementalType": "fighting",
+  "team": [
+    {
+      "species": "primeape",
+      "gender": "MALE",
+      "level": 29,
+      "nature": "bashful",
+      "ability": "vitalspirit",
+      "moveset": [
+        "leer",
+        "doubleteam",
+        "rockslide",
+        "focuspunch"
+      ],
+      "ivs": {},
+      "evs": {}
+    },
+    {
+      "species": "poliwrath",
+      "gender": "MALE",
+      "level": 31,
+      "nature": "bashful",
+      "ability": "waterabsorb",
+      "moveset": [
+        "hypnosis",
+        "bodyslam",
+        "surf",
+        "focuspunch"
+      ],
+      "ivs": {},
+      "evs": {},
+      "heldItem": "sitrus_berry"
+    }
+  ]
+}

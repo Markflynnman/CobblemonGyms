@@ -1,14 +1,10 @@
 package com.markflynnman.cobblemon_gyms;
 
 import com.cobblemon.mod.common.api.Priority;
-import com.cobblemon.mod.common.api.battles.model.PokemonBattle;
-import com.cobblemon.mod.common.api.battles.model.actor.BattleActor;
 import com.cobblemon.mod.common.api.events.CobblemonEvents;
 import com.cobblemon.mod.common.api.events.battles.BattleVictoryEvent;
 import com.cobblemon.mod.common.api.events.starter.StarterChosenEvent;
 import com.cobblemon.mod.common.api.types.ElementalTypes;
-import com.cobblemon.mod.common.battles.actor.PlayerBattleActor;
-import com.cobblemon.mod.common.platform.events.ServerEvent;
 import com.gitlab.srcmc.rctapi.api.RCTApi;
 import com.gitlab.srcmc.rctapi.api.models.TrainerModel;
 import com.gitlab.srcmc.rctapi.api.trainer.TrainerRegistry;
@@ -30,7 +26,6 @@ import com.markflynnman.cobblemon_gyms.network.CStarterPokemonDataSyncPacket;
 import com.markflynnman.cobblemon_gyms.network.PacketHandler;
 import com.markflynnman.cobblemon_gyms.worldgen.dimension.GymDimension;
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -65,20 +60,11 @@ public class CobblemonGyms
     public static final String MODID = "cobblemon_gyms";
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final RCTApi RCT = RCTApi.getInstance(MODID);
-    private static MinecraftServer server;
 
     private static final Gson GSON = new GsonBuilder()
             .setPrettyPrinting()
             .disableHtmlEscaping()
             .create();
-
-    private static String fileToId(File file) {
-        var name = file.getName().toLowerCase().trim();
-        var i = name.lastIndexOf('.');
-        return (i < 0 ? name : name.substring(0, i)).replace(' ', '_');
-    }
-
-
 
     public CobblemonGyms(IEventBus modEventBus, ModContainer modContainer)
     {
@@ -138,7 +124,13 @@ public class CobblemonGyms
             MinecraftServer server = event.getServer();
             GymBattleHandler.getINSTANCE().setServer(server);
 
-            GymHandler.initGyms(server.getLevel(GymDimension.COBBLEMON_GYMS_LEVEL_KEY));
+            for (int i = -2; i <= 1; i++) {
+                for (int j = -2; j <= 1; j++) {
+                    event.getServer().getLevel(GymDimension.COBBLEMON_GYMS_LEVEL_KEY).setChunkForced(i, j, true);
+                }
+            }
+
+            GymHandler.initGyms(server.getLevel(GymDimension.COBBLEMON_GYMS_LEVEL_KEY), server);
             GymHandler.setGymAttendantUUID(UUID.randomUUID());
             GymHandler.setProfessorOakUUID(UUID.randomUUID());
             GymHandler.initHubNPCs(server);
@@ -179,9 +171,8 @@ public class CobblemonGyms
                         gymLeaderModel.getModelType(),
                         ElementalTypes.INSTANCE.get(gymLeaderModel.getElementalType()),
                         trainerRegistry.getById(trainerID),
-                        trainerID,
-                        UUID.randomUUID()));
-
+                        trainerID
+                ));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -5,6 +5,7 @@ import com.gitlab.srcmc.rctapi.api.RCTApi;
 import com.gitlab.srcmc.rctapi.api.battle.BattleRules;
 import com.gitlab.srcmc.rctapi.api.trainer.TrainerNPC;
 import com.markflynnman.cobblemon_gyms.CobblemonGyms;
+import com.markflynnman.cobblemon_gyms.worldgen.dimension.GymDimension;
 import com.markflynnman.cobblemon_gyms.worldgen.feature.GymArenaFeatures;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.ParseResults;
@@ -14,9 +15,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.ServerLevelAccessor;
 
 import java.util.*;
@@ -53,10 +52,16 @@ public class GymHandler {
         server.getCommands().performCommand(results, command);
     }
 
-    public static void initGyms(ServerLevelAccessor level) {
-        for (BlockPos gymLocation : gymLocations) {
-            GymArenaFeatures.place(level, gymLocation, false, false, ElementalTypes.INSTANCE.get("normal"));
-            gymArenas.add(new GymArena(gymLocation, false, UUID.randomUUID()));
+    public static void initGyms(ServerLevelAccessor level, MinecraftServer server) {
+        if (gymArenas.isEmpty()) {
+            for (BlockPos gymLocation : gymLocations) {
+                GymArenaFeatures.place(level, gymLocation, false, false, ElementalTypes.INSTANCE.get("normal"));
+                gymArenas.add(new GymArena(gymLocation, false, UUID.randomUUID()));
+                BlockPos trainerSpawn = new BlockPos(gymLocation.getX() + 23, 0, gymLocation.getZ() + 14);
+                int chunkX = level.getChunk(trainerSpawn).getPos().x;
+                int chunkZ = level.getChunk(trainerSpawn).getPos().z;
+                server.getLevel(GymDimension.COBBLEMON_GYMS_LEVEL_KEY).setChunkForced(chunkX, chunkZ, true);
+            }
         }
     }
 
@@ -73,7 +78,7 @@ public class GymHandler {
     }
 
     public static boolean startGym(ServerLevelAccessor level, ServerPlayer player, String badge) {
-        GymArena gymArena = gymArenas.get(nextGymID);
+        GymArena gymArena = gymArenas.get(nextGymID%8);
         if (gymArena.getBattleInProgress()) {
             for (int i = 0; i < gymArenas.size(); i++) {
                 int index = (nextGymID + 1) % gymArenas.size();
@@ -83,9 +88,6 @@ public class GymHandler {
                 }
             }
         }
-        for (String key: gymLeaders.keySet()) {
-            CobblemonGyms.LOGGER.warn(key);
-        }
         if (!gymLeaders.containsKey(badge)) {
             player.sendSystemMessage(Component.literal("Failed to find " + badge + " gym leader."), true);
             CobblemonGyms.LOGGER.error("Failed to find " + badge + " in gymLeaders Map.");
@@ -93,9 +95,9 @@ public class GymHandler {
         }
         BlockPos trainerSpawn = new BlockPos(gymArena.getGymLocation().getX()+23, gymArena.getGymLocation().getY()+2, gymArena.getGymLocation().getZ()+14);
         GymLeader gymLeader = gymLeaders.get(badge);
-        GymBattleHandler.getINSTANCE().addBattle(player.getUUID(), gymLeader);
+        gymArena.setGymLeader(gymLeader);
+        GymBattleHandler.getINSTANCE().addBattle(player.getUUID(), gymArena);
 
-        // TODO Fix NPCs spawning when they already exist
         // Spawn EasyNPC
         String command = "easy_npc preset import data cobblemon_gyms:preset/"+gymLeader.getModelType()+"/"+gymLeader.getNameNPC()+".npc.nbt "+trainerSpawn.getX()+" "+trainerSpawn.getY()+" "+trainerSpawn.getZ()+" "+gymArena.getTrainerUUID();
         CommandSourceStack commandSourceStack = player.createCommandSourceStack().withSuppressedOutput().withPermission(4);
@@ -103,17 +105,13 @@ public class GymHandler {
         ParseResults<CommandSourceStack> results = commanddispatcher.parse(command, commandSourceStack);
         player.getServer().getCommands().performCommand(results, command);
 
-//        player.sendSystemMessage(Component.literal(command));
-
         GymArenaFeatures.place(level, gymArena.getGymLocation(), false, true, gymLeader.getType());
         player.teleportTo(level.getLevel(), gymArena.getGymLocation().getX()+23.5, gymArena.getGymLocation().getY()+2, gymArena.getGymLocation().getZ()+32.5, 180, 0);
-        LivingEntity trainer = EntityType.VILLAGER.spawn(level.getLevel(), trainerSpawn.offset(0,-10,0), MobSpawnType.EVENT); // Spawn out of sight
+        LivingEntity trainer = (LivingEntity) player.getServer().getLevel(GymDimension.COBBLEMON_GYMS_LEVEL_KEY).getEntity(gymArena.getTrainerUUID());
         RCTApi.getInstance(CobblemonGyms.MODID).getTrainerRegistry().getById(gymLeader.getTrainerID(), TrainerNPC.class).setEntity(trainer);
         RCTApi.getInstance(CobblemonGyms.MODID).getBattleManager().startSingle(CobblemonGyms.RCT.getTrainerRegistry().getById(player.getName().getString()), gymLeaders.get(badge).getTrainer(), new BattleRules());
-        trainer.remove(Entity.RemovalReason.DISCARDED);
 
-        // TODO Fix this
-//        gymArena.setBattleInProgress(true);
+        gymArena.setBattleInProgress(true);
         nextGymID++;
 
         return true;
@@ -122,22 +120,21 @@ public class GymHandler {
     public static void cleanNPCS(MinecraftServer server) {
         for (GymArena gymArena: gymArenas) {
             // Delete EasyNPC
-            String command = "easy_npc delete " + gymArena.getTrainerUUID();
-            CommandSourceStack commandSourceStack = server.createCommandSourceStack().withSuppressedOutput().withPermission(4);
-            CommandDispatcher<CommandSourceStack> commanddispatcher = server.getCommands().getDispatcher();
-            ParseResults<CommandSourceStack> results = commanddispatcher.parse(command, commandSourceStack);
-            server.getCommands().performCommand(results, command);
+            Entity trainer = server.getLevel(GymDimension.COBBLEMON_GYMS_LEVEL_KEY).getEntity(gymArena.getTrainerUUID());
+            if (trainer != null) {
+                trainer.remove(Entity.RemovalReason.DISCARDED);
+            }
         }
 
         // Delete Professor Oak and Gym Attendant
-        String command = "easy_npc delete " + professorOakUUID;
-        CommandSourceStack commandSourceStack = server.createCommandSourceStack().withSuppressedOutput().withPermission(4);
-        CommandDispatcher<CommandSourceStack> commanddispatcher = server.getCommands().getDispatcher();
-        ParseResults<CommandSourceStack> results = commanddispatcher.parse(command, commandSourceStack);
-        server.getCommands().performCommand(results, command);
+        Entity professorOak = server.getLevel(GymDimension.COBBLEMON_GYMS_LEVEL_KEY).getEntity(professorOakUUID);
+        if (professorOak != null) {
+            professorOak.remove(Entity.RemovalReason.DISCARDED);
+        }
 
-        command = "easy_npc delete " + professorOakUUID;
-        results = commanddispatcher.parse(command, commandSourceStack);
-        server.getCommands().performCommand(results, command);
+        Entity gymAttendant = server.getLevel(GymDimension.COBBLEMON_GYMS_LEVEL_KEY).getEntity(gymAttendantUUID);
+        if (gymAttendant != null) {
+            gymAttendant.remove(Entity.RemovalReason.DISCARDED);
+        }
     }
 }
